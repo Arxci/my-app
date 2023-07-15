@@ -1,22 +1,17 @@
-import Link from 'next/link'
-
 import Container from '@/components/ui/container'
-import { siteConfig } from '@/config/site'
+
 import NavDesktop from '@/components/layout/nav-desktop'
+import { siteConfig } from '@/config/site'
+import NavActions from '@/components/layout/nav-actions'
 
 const MainHeader = () => {
 	return (
-		<header>
+		<header className="border-b sticky top-0 z-20 bg-background px-2 lg:px-4">
 			<Container>
-				<div className="sticky h-16 m-auto w-full  flex items-center gap-6">
-					<Link
-						href="/"
-						className="font-bold"
-					>
-						{siteConfig.name}
-					</Link>
-					<NavDesktop />
-				</div>
+				<nav className=" h-16 m-auto w-full  flex items-center gap-6">
+					<NavDesktop items={siteConfig.navDesktop} />
+					<NavActions />
+				</nav>
 			</Container>
 		</header>
 	)

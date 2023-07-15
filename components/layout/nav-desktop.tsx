@@ -17,11 +17,11 @@ import {
 	navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 
-interface MainNavProps {
+interface NavDesktop {
 	items?: MainNavItem[]
 }
 
-const NavDesktop = ({ items }: MainNavProps) => {
+const NavDesktop = ({ items }: NavDesktop) => {
 	return (
 		<div className="hidden gap-6 lg:flex">
 			<Link
@@ -29,10 +29,6 @@ const NavDesktop = ({ items }: MainNavProps) => {
 				href="/"
 				className="hidden items-center space-x-2 lg:flex"
 			>
-				<Icons.logo
-					className="h-6 w-6"
-					aria-hidden="true"
-				/>
 				<span className="hidden font-bold lg:inline-block">
 					{siteConfig.name}
 				</span>
@@ -53,10 +49,6 @@ const NavDesktop = ({ items }: MainNavProps) => {
 												className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
 												href="/"
 											>
-												<Icons.logo
-													className="h-6 w-6"
-													aria-hidden="true"
-												/>
 												<div className="mb-2 mt-4 text-lg font-medium">
 													{siteConfig.name}
 												</div>

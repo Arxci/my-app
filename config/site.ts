@@ -2,28 +2,29 @@ import { productCategories } from '@/config/products'
 import { slugify } from '@/lib/utils'
 
 export const siteConfig = {
-	name: 'Shoe Store',
-	description: 'An open source e-commerce shoe store built in Next.js 13.',
-	mainNav: [
+	name: 'Nike',
+	description:
+		'Discover top-notch athletic gear and fashion at our premier sports emporium.',
+	navDesktop: [
 		{
-			title: 'Lobby',
+			title: 'Home',
 			items: [
 				{
 					title: 'Products',
-					href: '/products',
+					href: '/',
 					description: 'All the products we have to offer.',
 					items: [],
 				},
 				{
-					title: 'Build a Board',
-					href: '/build-a-board',
-					description: 'Build your own custom skateboard.',
+					title: 'On Sale',
+					href: '/',
+					description: 'View all of our on sale products.',
 					items: [],
 				},
 				{
-					title: 'Blog',
-					href: '/blog',
-					description: 'Read our latest blog posts.',
+					title: 'Features',
+					href: '/',
+					description: 'Check out some of our favorites!',
 					items: [],
 				},
 			],

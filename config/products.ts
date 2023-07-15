@@ -1,155 +1,142 @@
 export const productCategories = [
 	{
-		title: 'skateboards',
-		image: '/images/skateboard-one.webp',
+		title: 'Shoes',
 		subcategories: [
 			{
-				title: 'Decks',
-				description: 'The board itself.',
-				image: '/images/deck-one.webp',
-				slug: 'decks',
+				title: 'Jordan',
+				description:
+					'Experience unmatched style and performance with iconic Jordan shoes today!',
+				slug: 'jordan',
 			},
 			{
-				title: 'Wheels',
-				description: 'The wheels that go on the board.',
-				image: '/images/wheel-one.webp',
-				slug: 'wheels',
+				title: 'Lifestyle',
+				description:
+					'Elevate your everyday with sleek and versatile lifestyle shoes now!',
+				slug: 'lifestyle',
 			},
 			{
-				title: 'Trucks',
-				description: 'The trucks that go on the board.',
-				image: '/images/truck-one.webp',
-				slug: 'trucks',
+				title: 'Running',
+				description:
+					'Unleash your speed and conquer every mile with top-notch running shoes!',
+				slug: 'running',
 			},
 			{
-				title: 'Bearings',
-				description: 'The bearings that go in the wheels.',
-				image: '/images/bearing-one.webp',
-				slug: 'bearings',
+				title: 'Basketball',
+				description:
+					'Dominate the court and soar to new heights with basketball shoes!',
+				slug: 'basketball',
 			},
 			{
-				title: 'Griptape',
-				description: 'The griptape that goes on the board.',
-				image: '/images/griptape-one.webp',
-				slug: 'griptape',
+				title: 'Soccer',
+				description:
+					'Score goals in style and precision with top-tier soccer shoes!',
+				slug: 'soccer',
 			},
 			{
-				title: 'Hardware',
-				description: 'The hardware that goes on the board.',
-				image: '/images/hardware-one.webp',
-				slug: 'hardware',
+				title: 'Football',
+				description:
+					'Unleash your game-changing skills with elite football shoes built for victory!',
+				slug: 'football',
 			},
 			{
-				title: 'Tools',
-				description: 'The tools that go with the board.',
-				image: '/images/tool-one.webp',
-				slug: 'tools',
+				title: 'Tennis',
+				description:
+					'Elevate your performance on the court with agile and responsive tennis shoes!',
+				slug: 'tennis',
+			},
+			{
+				title: 'Golf',
+				description:
+					'Elevate your swing and conquer the greens with premium golf shoes!',
+				slug: 'golf',
+			},
+			{
+				title: 'Baseball',
+				description:
+					'Step up to the plate with confidence in high-performance baseball shoes!',
+				slug: 'baseball',
 			},
 		],
 	},
 	{
-		title: 'clothing',
-		image: '/images/clothing-one.webp',
+		title: 'Clothing',
 		subcategories: [
 			{
 				title: 'T-shirts',
-				description: 'Cool and comfy tees for effortless style.',
+				description:
+					'Experience comfort and style with our trendy and versatile t-shirts!',
 				slug: 't-shirts',
 			},
 			{
-				title: 'Hoodies',
-				description: 'Cozy up in trendy hoodies.',
-				slug: 'hoodies',
-			},
-			{
-				title: 'Pants',
-				description: 'Relaxed and stylish pants for everyday wear.',
-				slug: 'pants',
-			},
-			{
 				title: 'Shorts',
-				description: 'Stay cool with casual and comfortable shorts.',
+				description:
+					'Stay cool and active in our stylish and comfortable shorts!',
 				slug: 'shorts',
 			},
 			{
-				title: 'Hats',
-				description: 'Top off your look with stylish and laid-back hats.',
-				slug: 'hats',
-			},
-		],
-	},
-	{
-		title: 'shoes',
-		image: '/images/shoe-one.webp',
-		subcategories: [
-			{
-				title: 'Low Tops',
-				description: 'Rad low tops shoes for a stylish low-profile look.',
-				slug: 'low-tops',
+				title: 'Hoodies',
+				description:
+					'Stay cozy and fashionable with our must-have, ultra-soft hoodies!',
+				slug: 'hoodies',
 			},
 			{
-				title: 'High Tops',
-				description: 'Elevate your style with rad high top shoes.',
-				slug: 'high-tops',
+				title: 'Jackets',
+				description:
+					'Embrace the elements in style with our sleek and weather-ready jackets!',
+				slug: 'jackets',
 			},
 			{
-				title: 'Slip-ons',
-				description: 'Effortless style with rad slip-on shoes.',
-				slug: 'slip-ons',
-			},
-			{
-				title: 'Pros',
-				description: 'Performance-driven rad shoes for the pros.',
-				slug: 'pros',
-			},
-			{
-				title: 'Classics',
-				description: 'Timeless style with rad classic shoes.',
-				slug: 'classics',
+				title: 'Underwear',
+				description:
+					'Experience ultimate comfort and support with our premium quality underwear!',
+				slug: 'underwear',
 			},
 		],
 	},
 	{
 		title: 'accessories',
-		image: '/images/backpack-one.webp',
 		subcategories: [
 			{
-				title: 'Skate Tools',
-				description:
-					'Essential tools for maintaining your skateboard, all rad.',
-				slug: 'skate-tools',
-			},
-			{
-				title: 'Bushings',
-				description: 'Upgrade your ride with our rad selection of bushings.',
-				slug: 'bushings',
-			},
-			{
-				title: 'Shock & Riser Pads',
-				description:
-					"Enhance your skateboard's performance with rad shock and riser pads.",
-				slug: 'shock-riser-pads',
-			},
-			{
-				title: 'Skate Rails',
-				description:
-					'Add creativity and style to your tricks with our rad skate rails.',
-				slug: 'skate-rails',
-			},
-			{
-				title: 'Wax',
-				description: 'Keep your board gliding smoothly with our rad skate wax.',
-				slug: 'wax',
-			},
-			{
 				title: 'Socks',
-				description: 'Keep your feet comfy and stylish with our rad socks.',
+				description:
+					'Step into comfort and style with our premium quality socks!',
 				slug: 'socks',
 			},
 			{
 				title: 'Backpacks',
-				description: 'Carry your gear in style with our rad backpacks.',
+				description:
+					'Carry your essentials in style and comfort with our versatile backpacks!',
 				slug: 'backpacks',
+			},
+			{
+				title: 'Hats',
+				description:
+					'Elevate your look and shield yourself from the sun with hats!',
+				slug: 'hats',
+			},
+			{
+				title: 'Sunglasses',
+				description:
+					'Stay cool and stylish while protecting your eyes with sleek sunglasses!',
+				slug: 'sunglasses',
+			},
+			{
+				title: 'Gloves',
+				description:
+					'Protect your hands with style and functionality using our premium gloves!',
+				slug: 'gloves',
+			},
+			{
+				title: 'Yoga Mats',
+				description:
+					'Elevate your yoga practice with our premium, non-slip yoga mats!',
+				slug: 'yoga-mats',
+			},
+			{
+				title: 'Water Bottles',
+				description:
+					'Stay hydrated on-the-go with our durable and eco-friendly water bottles!',
+				slug: 'water-bottles',
 			},
 		],
 	},

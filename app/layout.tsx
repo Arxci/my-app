@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Nunito } from 'next/font/google'
 
 import MainHeader from '@/components/layout/main-header'
+import MainFooter from '@/components/layout/main-footer'
 import { siteConfig } from '@/config/site'
 
 import '@/styles/global.css'
@@ -20,9 +21,10 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body className={font.className}>
+			<body className={`${font.className} flex flex-col`}>
 				<MainHeader />
-				{children}
+				<main className="relative flex-1">{children}</main>
+				<MainFooter />
 			</body>
 		</html>
 	)
