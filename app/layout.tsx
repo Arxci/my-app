@@ -1,18 +1,9 @@
-import type { Metadata } from 'next'
 import { Nunito } from 'next/font/google'
-
-import MainHeader from '@/components/layout/main-header'
-import MainFooter from '@/components/layout/main-footer'
-import { siteConfig } from '@/config/site'
+import { ClerkProvider } from '@clerk/nextjs'
 
 import '@/styles/global.css'
 
 const font = Nunito({ subsets: ['latin'] })
-
-export const metadata: Metadata = {
-	title: siteConfig.name,
-	description: siteConfig.description,
-}
 
 export default function RootLayout({
 	children,
@@ -20,12 +11,12 @@ export default function RootLayout({
 	children: React.ReactNode
 }) {
 	return (
-		<html lang="en">
-			<body className={`${font.className} flex flex-col min-h-screen`}>
-				<MainHeader />
-				<main className="relative flex-1">{children}</main>
-				<MainFooter />
-			</body>
-		</html>
+		<ClerkProvider>
+			<html lang="en">
+				<body className={`${font.className}`}>
+					<main className="">{children}</main>
+				</body>
+			</html>
+		</ClerkProvider>
 	)
 }
