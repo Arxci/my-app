@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body className={`${font.className} flex flex-col`}>
+			<body className={`${font.className} flex flex-col min-h-screen`}>
 				<MainHeader />
 				<main className="relative flex-1">{children}</main>
 				<MainFooter />
