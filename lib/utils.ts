@@ -34,3 +34,8 @@ export const isAdmin = async () => {
 
 	return user.publicMetadata.userType === 'admin'
 }
+
+export const formatter = new Intl.NumberFormat('en-US', {
+	style: 'currency',
+	currency: 'USD',
+})
