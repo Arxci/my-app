@@ -1,6 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
+import { UserButton } from '@clerk/nextjs'
 
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
@@ -24,7 +25,7 @@ const DashboardNavDesktop = () => {
 	]
 
 	return (
-		<ul className="flex items-center gap-6">
+		<ul className="flex items-center gap-6 w-full">
 			{NAV_LINKS.map((link) => (
 				<NavLink
 					key={link.id}
@@ -33,6 +34,9 @@ const DashboardNavDesktop = () => {
 					isActive={link.isActive}
 				/>
 			))}
+			<div className="ml-auto">
+				<UserButton afterSignOutUrl="/sign-in" />
+			</div>
 		</ul>
 	)
 }
