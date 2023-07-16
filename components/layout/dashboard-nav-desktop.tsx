@@ -35,7 +35,7 @@ const DashboardNavDesktop = () => {
 				/>
 			))}
 			<div className="ml-auto">
-				<UserButton afterSignOutUrl="/sign-in" />
+				<UserButton afterSignOutUrl="/" />
 			</div>
 		</ul>
 	)

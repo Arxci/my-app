@@ -3,8 +3,8 @@ import { type Metadata } from 'next'
 import { SignUp } from '@clerk/nextjs'
 
 export const metadata: Metadata = {
-	title: 'Sign In',
-	description: 'Sign in to your account',
+	title: 'Sign up',
+	description: 'Sign up and create an account',
 }
 
 export default async function SignInPage() {
