@@ -1,10 +1,9 @@
 import Link from 'next/link'
 
 import Container from '../ui/container'
-import DashboardNavDesktop from './dashboard-nav-desktop'
 import { siteConfig } from '@/config/site'
 
-const DashboardHeader = () => {
+const AuthHeader = () => {
 	return (
 		<header className="border-b sticky top-0 z-40 bg-background px-4 sm:px-8 ">
 			<Container>
@@ -16,11 +15,10 @@ const DashboardHeader = () => {
 					>
 						{siteConfig.name}
 					</Link>
-					<DashboardNavDesktop />
 				</nav>
 			</Container>
 		</header>
 	)
 }
 
-export default DashboardHeader
+export default AuthHeader

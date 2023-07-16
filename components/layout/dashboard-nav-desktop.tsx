@@ -1,10 +1,11 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { UserButton } from '@clerk/nextjs'
+import { SignOutButton } from '@clerk/nextjs'
 
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
+import { Button } from '../ui/button'
 
 const DashboardNavDesktop = () => {
 	const pathName = usePathname()
@@ -35,7 +36,9 @@ const DashboardNavDesktop = () => {
 				/>
 			))}
 			<div className="ml-auto">
-				<UserButton afterSignOutUrl="/" />
+				<SignOutButton>
+					<Button>Sign Out</Button>
+				</SignOutButton>
 			</div>
 		</ul>
 	)
