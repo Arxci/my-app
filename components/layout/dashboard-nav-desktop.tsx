@@ -10,6 +10,8 @@ import { Button } from '../ui/button'
 const DashboardNavDesktop = () => {
 	const pathName = usePathname()
 
+	console.log(pathName)
+
 	const NAV_LINKS = [
 		{
 			id: 0,
