@@ -2,7 +2,7 @@ import { Nunito } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
 
 import '@/styles/global.css'
-import { Toaster } from 'sonner'
+import { Toaster } from '@/components/ui/toaster'
 
 const font = Nunito({ subsets: ['latin'] })
 
@@ -15,8 +15,8 @@ export default function RootLayout({
 		<ClerkProvider>
 			<html lang="en">
 				<body className={`${font.className}`}>
+					{children}
 					<Toaster />
-					<main className="">{children}</main>
 				</body>
 			</html>
 		</ClerkProvider>

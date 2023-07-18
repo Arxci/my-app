@@ -22,7 +22,7 @@ model Image {
 model Product {
   id              String    @id @default(uuid())
   name            String
-  description     String
+  description     String    @db.Text()
   price           Decimal
   isFeatured      Boolean
   images          Image[]      

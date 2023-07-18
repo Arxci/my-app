@@ -26,7 +26,8 @@ import { Input } from '@/components/ui/input'
 import { toast } from 'sonner'
 import AlertModal from '../modals/alert-modal'
 import ImageUpload from '@/components/ui/image-upload'
-import { Checkbox } from '@/components/ui/checkbox'
+import { Textarea } from '../ui/textarea'
+import { Switch } from '../ui/switch'
 
 const formSchema = z.object({
 	name: z.string().min(1),
@@ -61,13 +62,10 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
 		  }
 		: {
 				name: '',
-				images: [],
+				description,
 				price: 0,
-				categoryId: '',
-				colorId: '',
-				sizeId: '',
+				images: [],
 				isFeatured: false,
-				isArchived: false,
 		  }
 
 	const form = useForm<ProductFormValues>({
@@ -166,6 +164,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
 							</FormItem>
 						)}
 					/>
+
 					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 items-end">
 						<FormField
 							control={form.control}
@@ -206,24 +205,44 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
 							control={form.control}
 							name="isFeatured"
 							render={({ field }) => (
-								<FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-									<FormControl>
-										<Checkbox
-											checked={field.value}
-											// @ts-ignore
-											onCheckedChange={field.onChange}
-										/>
-									</FormControl>
-									<div className="space-y-1 leading-none">
-										<FormLabel>Featured</FormLabel>
+								<FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+									<div className="space-y-0.5">
+										<FormLabel className="text-base">Is Featured</FormLabel>
 										<FormDescription>
-											This product will appear on the home page
+											Should this product appear on the home page?
 										</FormDescription>
 									</div>
+									<FormControl>
+										<Switch
+											checked={field.value}
+											onCheckedChange={field.onChange}
+											disabled={loading}
+											aria-readonly
+										/>
+									</FormControl>
 								</FormItem>
 							)}
 						/>
 					</div>
+					<FormField
+						control={form.control}
+						name="description"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Description</FormLabel>
+								<FormControl>
+									<Textarea
+										disabled={loading}
+										className="resize-none h-[200px]"
+										placeholder="Product description"
+										{...field}
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+
 					<Button
 						disabled={loading}
 						className="ml-auto"

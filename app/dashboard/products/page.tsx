@@ -19,7 +19,7 @@ const ProductsPage = async () => {
 	const formattedProducts: ProductsColumn[] = products.map((item) => ({
 		id: item.id,
 		name: item.name,
-		description: item.description,
+		description: item.description.substring(0, 100) + '...',
 		price: formatter.format(item.price.toNumber()),
 		isFeatured: item.isFeatured,
 		createdAt: format(item.createdAt, 'MMMM do, yyyy'),
@@ -29,9 +29,9 @@ const ProductsPage = async () => {
 		<div className="flex-col px-4 sm:px-8">
 			<Container>
 				<div className="flex-1">
-					<div className="flex items-center py-6 justify-between">
+					<div className="flex flex-col gap-2 sm:items-center sm:flex-row py-6 justify-between">
 						<Heading
-							title={`Products (${formattedProducts.length})`}
+							title={`Products`}
 							description="Manage products for your store"
 						/>
 						<ProductsActions />
