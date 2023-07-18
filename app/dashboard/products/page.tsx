@@ -16,14 +16,21 @@ const ProductsPage = async () => {
 		},
 	})
 
-	const formattedProducts: ProductsColumn[] = products.map((item) => ({
-		id: item.id,
-		name: item.name,
-		description: item.description.substring(0, 100) + '...',
-		price: formatter.format(item.price.toNumber()),
-		isFeatured: item.isFeatured,
-		createdAt: format(item.createdAt, 'MMMM do, yyyy'),
-	}))
+	const formattedProducts: ProductsColumn[] = products.map((item) => {
+		const formattedIsFeatured =
+			item.isFeatured.toString().substring(0, 1).toUpperCase() +
+			item.isFeatured.toString().substring(1)
+		const formattedDescription = item.description.substring(0, 100) + '...'
+		const formattedPrice = formatter.format(item.price.toNumber())
+		return {
+			id: item.id,
+			name: item.name,
+			description: formattedDescription,
+			price: formattedPrice,
+			isFeatured: formattedIsFeatured,
+			createdAt: format(item.createdAt, 'MMMM do, yyyy'),
+		}
+	})
 
 	return (
 		<div className="flex-col px-4 sm:px-8">

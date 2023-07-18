@@ -40,7 +40,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 			<div className="mb-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-4">
 				{value.map((url) => (
 					<AspectRatio
-						ratio={1 / 0.75}
+						ratio={0.75 / 1}
 						key={url}
 						className="relative rounded-md overflow-hidden"
 					>
