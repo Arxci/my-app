@@ -92,7 +92,12 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
 		}
 	}
 
-	const deleteBillboardHandler = async () => {
+	const cancelEditHandler = () => {
+		router.push(`/dashboard/products`)
+		toast('Cancelled')
+	}
+
+	const deleteProductHandler = async () => {
 		try {
 			setLoading(true)
 
@@ -114,7 +119,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
 			<AlertModal
 				isOpen={open}
 				onClose={() => setOpen(false)}
-				onConfirm={deleteBillboardHandler}
+				onConfirm={deleteProductHandler}
 				loading={loading}
 			/>
 			<div className="flex items-center justify-between py-6">
@@ -249,6 +254,15 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
 						type="submit"
 					>
 						{action}
+					</Button>
+					<Button
+						disabled={loading}
+						className="ml-2"
+						onClick={cancelEditHandler}
+						variant="outline"
+						type="button"
+					>
+						Cancel
 					</Button>
 				</form>
 			</Form>
