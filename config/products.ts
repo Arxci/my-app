@@ -9,12 +9,6 @@ export const productCategories = [
 				slug: 'jordan',
 			},
 			{
-				title: 'Lifestyle',
-				description:
-					'Elevate your everyday with sleek and versatile lifestyle shoes now!',
-				slug: 'lifestyle',
-			},
-			{
 				title: 'Running',
 				description:
 					'Unleash your speed and conquer every mile with top-notch running shoes!',
@@ -27,28 +21,10 @@ export const productCategories = [
 				slug: 'basketball',
 			},
 			{
-				title: 'Soccer',
-				description:
-					'Score goals in style and precision with top-tier soccer shoes!',
-				slug: 'soccer',
-			},
-			{
 				title: 'Football',
 				description:
 					'Unleash your game-changing skills with elite football shoes built for victory!',
 				slug: 'football',
-			},
-			{
-				title: 'Tennis',
-				description:
-					'Elevate your performance on the court with agile and responsive tennis shoes!',
-				slug: 'tennis',
-			},
-			{
-				title: 'Golf',
-				description:
-					'Elevate your swing and conquer the greens with premium golf shoes!',
-				slug: 'golf',
 			},
 			{
 				title: 'Baseball',
@@ -78,18 +54,6 @@ export const productCategories = [
 				description:
 					'Stay cozy and fashionable with our must-have, ultra-soft hoodies!',
 				slug: 'hoodies',
-			},
-			{
-				title: 'Jackets',
-				description:
-					'Embrace the elements in style with our sleek and weather-ready jackets!',
-				slug: 'jackets',
-			},
-			{
-				title: 'Underwear',
-				description:
-					'Experience ultimate comfort and support with our premium quality underwear!',
-				slug: 'underwear',
 			},
 		],
 	},
@@ -125,18 +89,6 @@ export const productCategories = [
 				description:
 					'Protect your hands with style and functionality using our premium gloves!',
 				slug: 'gloves',
-			},
-			{
-				title: 'Yoga Mats',
-				description:
-					'Elevate your yoga practice with our premium, non-slip yoga mats!',
-				slug: 'yoga-mats',
-			},
-			{
-				title: 'Water Bottles',
-				description:
-					'Stay hydrated on-the-go with our durable and eco-friendly water bottles!',
-				slug: 'water-bottles',
 			},
 		],
 	},
