@@ -1,4 +1,5 @@
 import { type Icons } from '@/components/icons'
+import { Image } from '@prisma/client'
 
 export interface NavItem {
 	title: string
@@ -19,3 +20,11 @@ export interface NavItemWithOptionalChildren extends NavItem {
 }
 
 export type MainNavItem = NavItemWithOptionalChildren
+
+export interface Product {
+	id: string
+	name: string
+	price: string
+	isFeatured: boolean
+	images: Image[]
+}
