@@ -62,8 +62,6 @@ export const GET = async (req: Request) => {
 		const { searchParams } = new URL(req.url)
 		const isFeatured = searchParams.get('isFeatured')
 
-		console.log('hello????')
-
 		const products = await prismaDB.product.findMany({
 			where: {
 				isFeatured: isFeatured ? true : undefined,

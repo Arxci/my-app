@@ -25,6 +25,16 @@ export interface Product {
 	id: string
 	name: string
 	price: string
+	description: string
 	isFeatured: boolean
 	images: Image[]
+}
+
+export interface CartItem {
+	id: string
+	name: string
+	price: string
+	description: string
+	images: Image[]
+	quantity: number
 }

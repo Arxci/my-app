@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Product } from '@/types'
+import { CartItem, Product } from '@/types'
 import { AspectRatio } from './ui/aspect-ratio'
 import {
 	Card,
@@ -15,12 +15,31 @@ import Image from 'next/image'
 import { Icons } from './icons'
 import { formatter } from '@/lib/utils'
 import { Button, buttonVariants } from './ui/button'
+import { MouseEventHandler } from 'react'
+import useCart from '@/hooks/use-cart'
 
 interface ProductCardProps {
 	product: Product
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+	const cart = useCart()
+
+	const addToCartHandler: MouseEventHandler<HTMLButtonElement> = (event) => {
+		event.stopPropagation()
+
+		const formattedItem: CartItem = {
+			id: product.id,
+			name: product.name,
+			price: product.price,
+			description: product.description,
+			images: product.images,
+			quantity: 1,
+		}
+
+		cart.addItem(formattedItem)
+	}
+
 	return (
 		<Card>
 			<Link href={`/products/${product.id}`}>
@@ -79,7 +98,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 						aria-label="Add to cart"
 						size="sm"
 						className="h-8 w-full rounded-sm"
-						onClick={() => {}}
+						onClick={addToCartHandler}
 					>
 						Add to cart
 					</Button>
