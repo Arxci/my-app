@@ -7,7 +7,8 @@ import { toast } from 'sonner'
 interface CartStore {
 	items: CartItem[]
 	addItem: (data: CartItem) => void
-	removeItem: (id: string) => void
+	removeItem: (id: string, quantity: number) => void
+	updateQuantity: (id: string, quantity: number) => void
 	removeAll: () => void
 }
 
@@ -23,7 +24,7 @@ const useCart = create(
 				if (existingItem) {
 					const updatedItem: CartItem = {
 						...existingItem,
-						quantity: existingItem?.quantity + 1,
+						quantity: existingItem?.quantity + data.quantity,
 					}
 					updatedItems = currentItems
 					const itemIndex = currentItems.findIndex(
@@ -36,9 +37,8 @@ const useCart = create(
 
 				set({ items: updatedItems })
 				toast.success(`${data?.name} added to cart`)
-				console.log(get().items)
 			},
-			removeItem: (id: string) => {
+			removeItem: (id: string, quantity: number) => {
 				const currentItems = get().items
 				const existingItem = currentItems.find((item) => item.id === id)
 				let updatedItems: CartItem[]
@@ -47,12 +47,12 @@ const useCart = create(
 					return
 				}
 
-				if (existingItem?.quantity <= 1) {
+				if (existingItem?.quantity - quantity < 1) {
 					updatedItems = currentItems.filter((item) => item.id !== id)
 				} else {
 					const updatedItem: CartItem = {
 						...existingItem,
-						quantity: existingItem?.quantity - 1,
+						quantity: existingItem?.quantity - quantity,
 					}
 
 					updatedItems = currentItems
@@ -62,6 +62,30 @@ const useCart = create(
 
 				set({ items: updatedItems })
 				toast.success(`${existingItem?.name} removed from cart`)
+			},
+			updateQuantity: (id: string, quantity: number) => {
+				const currentItems = get().items
+				const existingItem = currentItems.find((item) => item.id === id)
+				let updatedItems: CartItem[]
+
+				if (!existingItem) {
+					return
+				}
+
+				if (quantity < 1) {
+					updatedItems = currentItems.filter((item) => item.id !== id)
+				} else {
+					const updatedItem: CartItem = {
+						...existingItem,
+						quantity: quantity,
+					}
+
+					updatedItems = currentItems
+					const itemIndex = currentItems.findIndex((item) => item.id === id)
+					updatedItems[itemIndex] = updatedItem
+				}
+
+				set({ items: updatedItems })
 			},
 			removeAll: () => set({ items: [] }),
 		}),
