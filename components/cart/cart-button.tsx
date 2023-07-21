@@ -10,11 +10,11 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from '@/components/ui/sheet'
-import { Badge } from './ui/badge'
+import { Badge } from '../ui/badge'
 import useCart from '@/hooks/use-cart'
 import { useEffect, useState } from 'react'
-import { Separator } from './ui/separator'
-import { ScrollArea } from './ui/scroll-area'
+import { Separator } from '../ui/separator'
+import { ScrollArea } from '../ui/scroll-area'
 import Image from 'next/image'
 import { formatter } from '@/lib/utils'
 import UpdateCartItem from './update-cart-item'

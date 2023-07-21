@@ -1,7 +1,7 @@
 import { currentUser, SignOutButton } from '@clerk/nextjs'
 import Link from 'next/link'
 
-import CartButton from '../cart-button'
+import CartButton from '../cart/cart-button'
 import { isAdmin } from '@/lib/utils'
 import { Button, buttonVariants } from '../ui/button'
 

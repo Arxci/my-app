@@ -2,9 +2,9 @@
 
 import useCart from '@/hooks/use-cart'
 import { CartItem } from '@/types'
-import { Button } from './ui/button'
-import { Icons } from './icons'
-import { Input } from './ui/input'
+import { Button } from '../ui/button'
+import { Icons } from '../icons'
+import { Input } from '../ui/input'
 import { ChangeEventHandler } from 'react'
 
 interface UpdateCartItemProps {
