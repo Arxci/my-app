@@ -23,17 +23,15 @@ interface NavDesktop {
 
 const NavDesktop = ({ items }: NavDesktop) => {
 	return (
-		<div className="hidden gap-6 lg:flex">
+		<div className="flex gap-6 ">
 			<Link
 				aria-label="Home"
 				href="/"
-				className="hidden items-center space-x-2 lg:flex"
+				className="items-center space-x-2 flex"
 			>
-				<span className="hidden font-bold lg:inline-block">
-					{siteConfig.name}
-				</span>
+				<span className=" font-bold inline-block">{siteConfig.name}</span>
 			</Link>
-			<NavigationMenu>
+			<NavigationMenu className="hidden lg:flex">
 				<NavigationMenuList>
 					{items?.[0]?.items ? (
 						<NavigationMenuItem>

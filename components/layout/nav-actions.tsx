@@ -1,25 +1,39 @@
-import { currentUser, SignOutButton } from '@clerk/nextjs'
+import { auth, currentUser, SignOutButton } from '@clerk/nextjs'
 import Link from 'next/link'
 
 import CartButton from '../cart/cart-button'
-import { isAdmin } from '@/lib/utils'
+import { cn, isAdmin } from '@/lib/utils'
 import { Button, buttonVariants } from '../ui/button'
+import HamburgerButton from '../hamburger-button'
+import { siteConfig } from '@/config/site'
 
 const NavActions = async () => {
-	const user = await currentUser()
+	const { userId } = auth()
 	const admin = await isAdmin()
 
 	return (
 		<div className="ml-auto flex items-center gap-2">
 			<CartButton />
-			{user && (
+			<HamburgerButton
+				items={siteConfig.navDesktop}
+				admin={admin}
+				userId={userId}
+			/>
+			{userId && (
 				<SignOutButton>
-					<Button>Sign Out</Button>
+					<Button className="hidden lg:block">Sign Out</Button>
 				</SignOutButton>
 			)}
-			{!user && (
+			{!userId && (
 				<Link href="/sign-in">
-					<div className={buttonVariants({})}>
+					<div
+						className={cn(
+							buttonVariants({
+								variant: 'default',
+							}),
+							'hidden lg:block'
+						)}
+					>
 						Sign In
 						<span className="sr-only">Sign In</span>
 					</div>
@@ -28,9 +42,12 @@ const NavActions = async () => {
 			{admin && (
 				<Link href="/dashboard">
 					<div
-						className={buttonVariants({
-							variant: 'outline',
-						})}
+						className={cn(
+							buttonVariants({
+								variant: 'outline',
+							}),
+							'hidden lg:block'
+						)}
 					>
 						Dashboard
 						<span className="sr-only">Dashboard</span>
