@@ -81,9 +81,9 @@ const CartButton = () => {
 												key={item.id}
 												className="space-y-3"
 											>
-												<div className="flex items-center space-x-4">
-													<div className="relative h-16 w-16 overflow-hidden rounded">
-														{item?.images?.length ? (
+												<div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-end">
+													<div className="flex items-center space-x-4 sm:mr-auto">
+														<div className="relative h-16 w-16 overflow-hidden rounded">
 															<Image
 																src={item.images[0].url}
 																alt={item.images[0]?.url ?? item.name}
@@ -92,28 +92,22 @@ const CartButton = () => {
 																className="absolute object-cover"
 																loading="lazy"
 															/>
-														) : (
-															<div className="flex h-full items-center justify-center bg-secondary">
-																<Icons.placeholder
-																	className="h-4 w-4 text-muted-foreground"
-																	aria-hidden="true"
-																/>
-															</div>
-														)}
-													</div>
-													<div className="flex flex-1 flex-col gap-1 self-start text-sm">
-														<span className="line-clamp-1">{item.name}</span>
-														<span className="line-clamp-1 text-muted-foreground">
-															{formatter.format(
-																Number(item.price) * Number(item.quantity)
-															)}
-														</span>
-														<span className="line-clamp-1 text-xs capitalize text-muted-foreground">
-															quantity: {item.quantity}
-														</span>
+														</div>
+														<div className="flex flex-1 flex-col gap-1 self-start text-sm">
+															<span className="line-clamp-1">{item.name}</span>
+															<span className="line-clamp-1 text-muted-foreground">
+																{formatter.format(
+																	Number(item.price) * Number(item.quantity)
+																)}
+															</span>
+															<span className="line-clamp-1 text-xs capitalize text-muted-foreground">
+																quantity: {item.quantity}
+															</span>
+														</div>
 													</div>
 													<UpdateCartItem item={item} />
 												</div>
+
 												<Separator />
 											</div>
 										))}

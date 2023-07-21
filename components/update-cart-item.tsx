@@ -32,7 +32,7 @@ const UpdateCartItem: React.FC<UpdateCartItemProps> = ({ item }) => {
 	}
 
 	return (
-		<div className="flex items-center space-x-1">
+		<div className="flex ml-auto sm:ml-0 items-center space-x-1">
 			<div className="flex items-center space-x-1">
 				<Button
 					variant="outline"
