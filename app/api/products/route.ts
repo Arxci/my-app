@@ -2,13 +2,14 @@ import prismaDB from '@/lib/prisma'
 import { auth } from '@clerk/nextjs'
 import { NextResponse } from 'next/server'
 import { isAdmin } from '@/lib/utils'
+import { connect } from 'http2'
 
 export const POST = async (req: Request) => {
 	try {
 		const { userId } = auth()
 		const body = await req.json()
 
-		const { name, description, price, images, isFeatured } = body
+		const { name, description, price, images, isFeatured, categoryIds } = body
 
 		const admin = await isAdmin()
 
@@ -22,6 +23,12 @@ export const POST = async (req: Request) => {
 
 		if (!name) {
 			return new NextResponse('Name is required', { status: 400 })
+		}
+
+		if (!categoryIds || !categoryIds.length) {
+			return new NextResponse('Please assign a category is required', {
+				status: 400,
+			})
 		}
 
 		if (!description) {
@@ -42,6 +49,9 @@ export const POST = async (req: Request) => {
 				price,
 				description,
 				isFeatured,
+				categories: {
+					connect: [...categoryIds],
+				},
 				images: {
 					createMany: {
 						data: [...images.map((image: { url: string }) => image)],
@@ -68,6 +78,7 @@ export const GET = async (req: Request) => {
 			},
 			include: {
 				images: true,
+				categories: true,
 			},
 			orderBy: {
 				createdAt: 'desc',

@@ -5,8 +5,8 @@ import Image from 'next/image'
 import { CldUploadWidget } from 'next-cloudinary'
 
 import { Button } from '@/components/ui/button'
-import { Icons } from '../icons'
-import { AspectRatio } from './aspect-ratio'
+import { Icons } from '../../../../components/icons'
+import { AspectRatio } from '../../../../components/ui/aspect-ratio'
 
 interface ImageUploadProps {
 	disabled?: boolean

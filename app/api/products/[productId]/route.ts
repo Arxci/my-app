@@ -14,7 +14,7 @@ export const PATCH = async (
 		const admin = await isAdmin()
 		const { productId } = params
 
-		const { name, price, description, images, isFeatured } = body
+		const { name, price, description, images, isFeatured, categoryIds } = body
 
 		if (!admin) {
 			return new NextResponse('Unauthorized', { status: 401 })
@@ -22,6 +22,12 @@ export const PATCH = async (
 
 		if (!userId) {
 			return new NextResponse('Unauthenticated', { status: 401 })
+		}
+
+		if (!categoryIds || !categoryIds.length) {
+			return new NextResponse('Please assign a category is required', {
+				status: 400,
+			})
 		}
 
 		if (!name) {
@@ -53,6 +59,9 @@ export const PATCH = async (
 				images: {
 					deleteMany: {},
 				},
+				categories: {
+					set: [],
+				},
 				isFeatured,
 			},
 		})
@@ -66,6 +75,9 @@ export const PATCH = async (
 					createMany: {
 						data: [...images.map((image: { url: string }) => image)],
 					},
+				},
+				categories: {
+					connect: [...categoryIds],
 				},
 			},
 		})
@@ -124,6 +136,7 @@ export const GET = async (
 			where: { id: productId },
 			include: {
 				images: true,
+				categories: true,
 			},
 		})
 

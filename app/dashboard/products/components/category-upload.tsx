@@ -19,7 +19,7 @@ import {
 } from '@/components/ui/popover'
 import { useState } from 'react'
 
-interface UploadCategoryProps {
+interface CategoryUploadProps {
 	disabled?: boolean
 	onChange: (value: string) => void
 	onRemove: (value: string) => void
@@ -27,7 +27,7 @@ interface UploadCategoryProps {
 	categories: Category[]
 }
 
-const UploadCategory: React.FC<UploadCategoryProps> = ({
+const CategoryUpload: React.FC<CategoryUploadProps> = ({
 	disabled,
 	onChange,
 	onRemove,
@@ -65,6 +65,7 @@ const UploadCategory: React.FC<UploadCategoryProps> = ({
 					<Button
 						variant="outline"
 						role="combobox"
+						disabled={disabled}
 						aria-expanded={open}
 						className="w-full justify-between"
 					>
@@ -76,17 +77,19 @@ const UploadCategory: React.FC<UploadCategoryProps> = ({
 						<CommandInput placeholder="Search for categories" />
 						<CommandEmpty>No categories found</CommandEmpty>
 						<CommandGroup heading="Categories">
-							{categories.map((category) => (
-								<CommandItem
-									key={category.id}
-									onSelect={() => {
-										uploadHandler(category.id)
-										setOpen(false)
-									}}
-								>
-									{category.name}
-								</CommandItem>
-							))}
+							<ScrollArea className="h-[150px]">
+								{categories.map((category) => (
+									<CommandItem
+										key={category.id}
+										onSelect={() => {
+											uploadHandler(category.id)
+											setOpen(false)
+										}}
+									>
+										{category.name}
+									</CommandItem>
+								))}
+							</ScrollArea>
 						</CommandGroup>
 					</Command>
 				</PopoverContent>
@@ -116,4 +119,4 @@ const UploadCategory: React.FC<UploadCategoryProps> = ({
 	)
 }
 
-export default UploadCategory
+export default CategoryUpload

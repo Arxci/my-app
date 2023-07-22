@@ -25,10 +25,10 @@ import { Input } from '@/components/ui/input'
 
 import { toast } from 'sonner'
 import AlertModal from '../modals/alert-modal'
-import ImageUpload from '@/components/ui/image-upload'
+import ImageUpload from '@/app/dashboard/products/components/image-upload'
 import { Textarea } from '../ui/textarea'
 import { Switch } from '../ui/switch'
-import UploadCategory from '@/app/dashboard/products/components/upload-category'
+import CategoryUpload from '@/app/dashboard/products/components/category-upload'
 
 const formSchema = z.object({
 	name: z.string().min(1),
@@ -42,7 +42,7 @@ const formSchema = z.object({
 type ProductFormValues = z.infer<typeof formSchema>
 
 interface ProductFormProps {
-	initialData: (Product & { images: Image[] }) | null
+	initialData: (Product & { images: Image[]; categories: Category[] }) | null
 	categories: Category[]
 }
 
@@ -65,6 +65,9 @@ const ProductForm: React.FC<ProductFormProps> = ({
 		? {
 				...initialData,
 				price: parseFloat(String(initialData?.price)),
+				categoryIds: initialData.categories.map((cat) => {
+					return { id: cat.id }
+				}),
 		  }
 		: {
 				name: '',
@@ -262,7 +265,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
 								<FormItem className="flex-1 ">
 									<FormLabel>Categories</FormLabel>
 									<FormControl>
-										<UploadCategory
+										<CategoryUpload
 											categories={categories}
 											value={field.value.map((category) => category.id)}
 											disabled={loading}
