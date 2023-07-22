@@ -6,6 +6,7 @@ const URL = `${process.env.NEXT_PUBLIC_API_URL}products`
 
 interface Query {
 	isFeatured?: boolean
+	category?: string
 }
 
 const getProducts = async (query: Query): Promise<Product[]> => {
@@ -13,6 +14,7 @@ const getProducts = async (query: Query): Promise<Product[]> => {
 		url: URL,
 		query: {
 			isFeatured: query.isFeatured,
+			category: query.category,
 		},
 	})
 

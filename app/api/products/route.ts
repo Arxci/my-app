@@ -3,6 +3,7 @@ import { auth } from '@clerk/nextjs'
 import { NextResponse } from 'next/server'
 import { isAdmin } from '@/lib/utils'
 import { connect } from 'http2'
+import { equal } from 'assert'
 
 export const POST = async (req: Request) => {
 	try {
@@ -71,10 +72,19 @@ export const GET = async (req: Request) => {
 	try {
 		const { searchParams } = new URL(req.url)
 		const isFeatured = searchParams.get('isFeatured')
+		const categories = searchParams.get('category')
+		const formattedCategories = categories?.split(',')
 
 		const products = await prismaDB.product.findMany({
 			where: {
 				isFeatured: isFeatured ? true : undefined,
+				categories: {
+					some: {
+						name: {
+							in: formattedCategories,
+						},
+					},
+				},
 			},
 			include: {
 				images: true,
@@ -85,7 +95,18 @@ export const GET = async (req: Request) => {
 			},
 		})
 
-		return NextResponse.json(products)
+		const filteredProducts = products.filter((product) => {
+			if (!formattedCategories) {
+				return true
+			}
+			const names = product.categories.map((cat) => cat.name)
+			let checker = (arr: string[], target: string[]) =>
+				target.every((v) => arr.includes(v))
+
+			return checker(names, formattedCategories)
+		})
+
+		return NextResponse.json(filteredProducts)
 	} catch (error) {
 		console.log('[PRODUCTS_GET]', error)
 		return new NextResponse('internal error', { status: 500 })

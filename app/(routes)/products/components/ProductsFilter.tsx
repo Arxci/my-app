@@ -1,3 +1,4 @@
+'use client'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import {
@@ -5,7 +6,6 @@ import {
 	SheetContent,
 	SheetDescription,
 	SheetHeader,
-	SheetTitle,
 	SheetTrigger,
 } from '@/components/ui/sheet'
 

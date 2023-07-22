@@ -6,12 +6,17 @@ import Container from '@/components/ui/container'
 import Heading from '@/components/ui/heading'
 import ProductsShowcase from './components/ProductsShowcase'
 
-const ProductsPage = async () => {
-	const products = await getProducts({})
+const ProductsPage = async ({
+	searchParams,
+}: {
+	searchParams: { category: string }
+}) => {
+	const { category } = searchParams
+	const products = await getProducts({ category })
 
 	return (
 		<div className="mb-6">
-			<Container>
+			<Container className="px-4 sm:px-8">
 				<Heading
 					title="Products"
 					description="Buy products from our store"
