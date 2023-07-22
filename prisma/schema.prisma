@@ -26,7 +26,25 @@ model Product {
   price           Decimal
   isFeatured      Boolean
   images          Image[]      
+  categoryId      String
+  category        Category        @relation("CategoryToProduct", fields: [categoryId], references: [id])
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@index([categoryId])
+}
+
+model Category {
+  id              String          @id @default(uuid())
+  name            String
+  products        Product[]       @relation("CategoryToProduct")
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
 }
 
+model SubCategory {
+  id              String          @id @default(uuid())
+  name            String
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+}

@@ -23,6 +23,12 @@ const DashboardNavDesktop = () => {
 			label: 'Products',
 			isActive: pathName === `/dashboard/products`,
 		},
+		{
+			id: 1,
+			url: '/dashboard/categories',
+			label: 'Categories',
+			isActive: pathName === `/dashboard/categories`,
+		},
 	]
 
 	return (

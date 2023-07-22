@@ -4,7 +4,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { Icons } from '@/components/icons'
 import Link from 'next/link'
 
-const ProductsActions = () => {
+const CategoriesActions = () => {
 	return (
 		<>
 			<Link
@@ -18,4 +18,4 @@ const ProductsActions = () => {
 	)
 }
 
-export default ProductsActions
+export default CategoriesActions
