@@ -2,8 +2,8 @@
 
 import { ColumnDef } from '@tanstack/react-table'
 import { ProductCellAction } from './cell-actions'
-import { Button } from '@/components/ui/button'
-import { Icons } from '@/components/icons'
+
+import { Category } from '@prisma/client'
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -13,6 +13,7 @@ export type ProductsColumn = {
 	description: string
 	price: string
 	isFeatured: string
+	categories: Category[]
 	createdAt: string
 }
 
@@ -33,12 +34,19 @@ export const columns: ColumnDef<ProductsColumn>[] = [
 		accessorKey: 'isFeatured',
 		header: 'Featured',
 	},
+
+	{
+		accessorKey: 'categories',
+		header: 'Categories',
+		cell: ({ row }) => <div>{`${row.original?.categories[0]?.name}...`}</div>,
+	},
 	{
 		accessorKey: 'createdAt',
 		header: 'Date',
 	},
 	{
 		id: 'actions',
+		header: 'Actions',
 		cell: ({ row }) => <ProductCellAction data={row.original} />,
 	},
 ]

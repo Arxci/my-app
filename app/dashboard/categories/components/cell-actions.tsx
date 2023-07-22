@@ -50,7 +50,7 @@ export const CategoryCellAction: React.FC<CategoryCellActionProps> = ({
 			/>
 			<div className="flex gap-2  items-center ">
 				<Link
-					href="/dashboard/categories/new"
+					href={`/dashboard/categories/${id}`}
 					className={buttonVariants({ variant: 'outline' })}
 				>
 					<Icons.edit className="h-4 w-4" />

@@ -2,7 +2,6 @@ import { format } from 'date-fns'
 
 import prismaDB from '@/lib/prisma'
 import { CategoryColumn, columns } from './components/column'
-import { formatter } from '@/lib/utils'
 import Heading from '@/components/ui/heading'
 import CategoriesActions from './components/actions'
 import Container from '@/components/ui/container'
@@ -36,6 +35,7 @@ const CategoriesPage = async () => {
 						<CategoriesActions />
 					</div>
 					<Separator />
+
 					<DataTable
 						columns={columns}
 						data={formattedCategories}

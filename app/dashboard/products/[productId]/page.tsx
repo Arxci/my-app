@@ -13,11 +13,16 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
 		},
 	})
 
+	const categories = await prismaDB.category.findMany()
+
 	return (
 		<div className="flex-col px-4 sm:px-8 pb-6">
 			<Container>
 				<div className="flex-1 ">
-					<ProductForm initialData={product} />
+					<ProductForm
+						initialData={product}
+						categories={categories}
+					/>
 				</div>
 			</Container>
 		</div>

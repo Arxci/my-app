@@ -8,7 +8,7 @@ const ProductsActions = () => {
 	return (
 		<>
 			<Link
-				href="/dashboard/categories/new"
+				href="/dashboard/products/new"
 				className={buttonVariants({ variant: 'outline' })}
 			>
 				<Icons.add />

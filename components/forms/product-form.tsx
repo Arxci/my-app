@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Image, Product } from '@prisma/client'
+import { Image, Product, Category } from '@prisma/client'
 import { Trash } from 'lucide-react'
 import * as z from 'zod'
 import { useForm } from 'react-hook-form'
@@ -28,6 +28,7 @@ import AlertModal from '../modals/alert-modal'
 import ImageUpload from '@/components/ui/image-upload'
 import { Textarea } from '../ui/textarea'
 import { Switch } from '../ui/switch'
+import UploadCategory from '@/app/dashboard/products/components/upload-category'
 
 const formSchema = z.object({
 	name: z.string().min(1),
@@ -35,15 +36,20 @@ const formSchema = z.object({
 	price: z.coerce.number().min(1),
 	images: z.object({ url: z.string() }).array(),
 	isFeatured: z.boolean().default(false).optional(),
+	categoryIds: z.object({ id: z.string() }).array(),
 })
 
 type ProductFormValues = z.infer<typeof formSchema>
 
 interface ProductFormProps {
 	initialData: (Product & { images: Image[] }) | null
+	categories: Category[]
 }
 
-const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
+const ProductForm: React.FC<ProductFormProps> = ({
+	initialData,
+	categories,
+}) => {
 	const [open, setOpen] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const params = useParams()
@@ -66,6 +72,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
 				price: 0,
 				images: [],
 				isFeatured: false,
+				categoryIds: [],
 		  }
 
 	const form = useForm<ProductFormValues>({
@@ -229,24 +236,52 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData }) => {
 							)}
 						/>
 					</div>
-					<FormField
-						control={form.control}
-						name="description"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Description</FormLabel>
-								<FormControl>
-									<Textarea
-										disabled={loading}
-										className="resize-none h-[200px]"
-										placeholder="Product description"
-										{...field}
-									/>
-								</FormControl>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
+					<div className="flex flex-col lg:flex-row gap-8 w-full">
+						<FormField
+							control={form.control}
+							name="description"
+							render={({ field }) => (
+								<FormItem className="flex-1">
+									<FormLabel>Description</FormLabel>
+									<FormControl>
+										<Textarea
+											disabled={loading}
+											className="resize-none h-[200px]"
+											placeholder="Product description"
+											{...field}
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name="categoryIds"
+							render={({ field }) => (
+								<FormItem className="flex-1 ">
+									<FormLabel>Categories</FormLabel>
+									<FormControl>
+										<UploadCategory
+											categories={categories}
+											value={field.value.map((category) => category.id)}
+											disabled={loading}
+											onChange={(id) =>
+												field.onChange([...field.value, { id }])
+											}
+											onRemove={(id) =>
+												field.onChange([
+													...field.value.filter((current) => current.id !== id),
+												])
+											}
+										/>
+									</FormControl>
+
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+					</div>
 
 					<Button
 						disabled={loading}

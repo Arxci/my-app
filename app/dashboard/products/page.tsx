@@ -14,6 +14,9 @@ const ProductsPage = async () => {
 		orderBy: {
 			createdAt: 'desc',
 		},
+		include: {
+			categories: true,
+		},
 	})
 
 	const formattedProducts: ProductsColumn[] = products.map((item) => {
@@ -22,12 +25,14 @@ const ProductsPage = async () => {
 			item.isFeatured.toString().substring(1)
 		const formattedDescription = item.description.substring(0, 100) + '...'
 		const formattedPrice = formatter.format(item.price.toNumber())
+
 		return {
 			id: item.id,
 			name: item.name,
 			description: formattedDescription,
 			price: formattedPrice,
 			isFeatured: formattedIsFeatured,
+			categories: item.categories,
 			createdAt: format(item.createdAt, 'MMMM do, yyyy'),
 		}
 	})
