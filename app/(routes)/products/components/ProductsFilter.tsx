@@ -98,136 +98,142 @@ const ProductsFilter: React.FC<ProductsFilter> = ({
 				<Form {...form}>
 					<form
 						onSubmit={form.handleSubmit(submitFormHandler)}
-						className="flex flex-col h-full"
+						className="flex flex-col h-full gap-2"
 					>
-						<ScrollArea className="h-full flex-1 ">
-							<FormField
-								control={form.control}
-								name="category"
-								render={({ field }) => (
-									<FormItem>
-										<div className="mb-4">
-											<FormLabel className="text-base">Categories</FormLabel>
-											<FormDescription>Filter by categories.</FormDescription>
-										</div>
-
-										{categories.map((cat) => (
-											<FormField
-												key={cat.id}
-												control={form.control}
-												name="category"
-												render={() => (
-													<FormItem>
-														<FormControl>
-															<div className="flex items-center space-x-2">
-																<Checkbox
-																	checked={field.value?.includes(cat.name)}
-																	onCheckedChange={(checked) => {
-																		return checked
-																			? field.onChange([
-																					...(field.value || []),
-																					cat.name,
-																			  ])
-																			: field.onChange(
-																					field.value?.filter(
-																						(value) => value !== cat.name
-																					)
-																			  )
-																	}}
-																	id={cat.name}
-																/>
-																<Label htmlFor={cat.name}>{cat.name}</Label>
-															</div>
-														</FormControl>
-													</FormItem>
-												)}
-											/>
-										))}
-									</FormItem>
-								)}
-							/>
-							<FormField
-								control={form.control}
-								name="priceRange"
-								render={({ field }) => (
-									<FormItem>
-										<div className="flex flex-col justify-center space-y-2 py-4">
+						<div className="flex h-full flex-1 flex-col gap-5 overflow-hidden">
+							<ScrollArea className="h-full mb-8">
+								<FormField
+									control={form.control}
+									name="category"
+									render={({ field }) => (
+										<FormItem>
 											<div className="mb-4">
-												<FormLabel
-													htmlFor="price"
-													className="text-base"
-												>
-													Price ($)
-												</FormLabel>
-												<FormDescription>Filter by price.</FormDescription>
+												<FormLabel className="text-base">Categories</FormLabel>
+												<FormDescription>Filter by categories.</FormDescription>
 											</div>
-											<FormControl>
-												<div className="space-y-4">
-													<Slider
-														variant="range"
-														thickness="thin"
-														defaultValue={[0, 500]}
-														max={500}
-														step={1}
-														value={field.value}
-														onValueChange={(value: number[]) => {
-															field.onChange(value)
-														}}
-														id="price"
-													/>
 
-													<div className="flex items-center space-x-4">
-														<Input
-															type="number"
-															inputMode="numeric"
-															min={0}
-															max={field.value ? field.value[1] : 500}
-															className="h-9"
-															value={field.value ? field.value[0] : 0}
-															id="minPrice"
-															onChange={(e) => {
-																const value = Number(e.target.value)
-																field.onChange([
-																	value,
-																	field.value ? field.value[1] : 500,
-																])
-															}}
-														/>
-														<span className="text-muted-foreground">-</span>
-														<Input
-															type="number"
-															inputMode="numeric"
-															min={field.value ? field.value[0] : 0}
-															max={500}
-															className="h-9"
-															value={field.value ? field.value[1] : 500}
-															id="maxPrice"
-															onChange={(e) => {
-																const value = Number(e.target.value)
-																field.onChange([
-																	field.value ? field.value[0] : 0,
-																	value,
-																])
-															}}
-														/>
-													</div>
+											{categories.map((cat) => (
+												<FormField
+													key={cat.id}
+													control={form.control}
+													name="category"
+													render={() => (
+														<FormItem>
+															<FormControl>
+																<div className="flex items-center space-x-2">
+																	<Checkbox
+																		checked={field.value?.includes(cat.name)}
+																		onCheckedChange={(checked) => {
+																			return checked
+																				? field.onChange([
+																						...(field.value || []),
+																						cat.name,
+																				  ])
+																				: field.onChange(
+																						field.value?.filter(
+																							(value) => value !== cat.name
+																						)
+																				  )
+																		}}
+																		id={cat.name}
+																	/>
+																	<Label htmlFor={cat.name}>{cat.name}</Label>
+																</div>
+															</FormControl>
+														</FormItem>
+													)}
+												/>
+											))}
+										</FormItem>
+									)}
+								/>
+								<FormField
+									control={form.control}
+									name="priceRange"
+									render={({ field }) => (
+										<FormItem>
+											<div className="flex flex-col justify-center space-y-2 py-4">
+												<div className="mb-4">
+													<FormLabel
+														htmlFor="price"
+														className="text-base"
+													>
+														Price ($)
+													</FormLabel>
+													<FormDescription>Filter by price.</FormDescription>
 												</div>
-											</FormControl>
-										</div>
-									</FormItem>
-								)}
-							/>
-						</ScrollArea>
-						<SheetFooter className="py-6 ">
-							<Button
-								type="submit"
-								variant="default"
-								size="lg"
-								className="w-full"
-							>
-								Submit
-							</Button>
-						</SheetFooter>
+												<FormControl>
+													<div className="space-y-4">
+														<Slider
+															variant="range"
+															thickness="thin"
+															defaultValue={[0, 500]}
+															max={500}
+															step={1}
+															value={field.value}
+															onValueChange={(value: number[]) => {
+																field.onChange(value)
+															}}
+															id="price"
+														/>
+
+														<div className="flex items-center space-x-4">
+															<Label htmlFor="minPrice">Min</Label>
+															<Input
+																type="number"
+																inputMode="numeric"
+																min={0}
+																max={field.value ? field.value[1] : 500}
+																className="h-9"
+																value={field.value ? field.value[0] : 0}
+																id="minPrice"
+																onChange={(e) => {
+																	const value = Number(e.target.value)
+																	field.onChange([
+																		value,
+																		field.value ? field.value[1] : 500,
+																	])
+																}}
+															/>
+															<span className="text-muted-foreground">-</span>
+															<Label htmlFor="maxPrice">Max</Label>
+															<Input
+																type="number"
+																inputMode="numeric"
+																min={field.value ? field.value[0] : 0}
+																max={500}
+																className="h-9"
+																value={field.value ? field.value[1] : 500}
+																id="maxPrice"
+																onChange={(e) => {
+																	const value = Number(e.target.value)
+																	field.onChange([
+																		field.value ? field.value[0] : 0,
+																		value,
+																	])
+																}}
+															/>
+														</div>
+													</div>
+												</FormControl>
+											</div>
+										</FormItem>
+									)}
+								/>
+							</ScrollArea>
+						</div>
+						<div className=" sticky bottom-0 py-2  bg-background">
+							<SheetFooter className="w-full">
+								<Button
+									type="submit"
+									variant="default"
+									size="lg"
+									className="w-full"
+								>
+									Submit
+								</Button>
+							</SheetFooter>
+						</div>
 					</form>
 				</Form>
 			</SheetContent>

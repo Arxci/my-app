@@ -14,7 +14,10 @@ const ProductsPage = async ({
 }) => {
 	const { category: categoryFilters, price: currentPrice } = searchParams
 
-	const products = await getProducts({ category: categoryFilters })
+	const products = await getProducts({
+		category: categoryFilters,
+		price: currentPrice,
+	})
 	const categories = await prismaDB.category.findMany()
 
 	return (
