@@ -30,6 +30,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Slider } from '@/components/ui/slider'
 import { Input } from '@/components/ui/input'
+import { Cast } from 'lucide-react'
 
 const FormSchema = z.object({
 	category: z.array(z.string()).optional(),
@@ -40,12 +41,14 @@ interface ProductsFilter {
 	categories: Category[]
 	currentFilters: string[]
 	currentPrice: number[]
+	currentSort: string
 }
 
 const ProductsFilter: React.FC<ProductsFilter> = ({
 	categories,
 	currentFilters,
 	currentPrice,
+	currentSort,
 }) => {
 	const router = useRouter()
 
@@ -77,7 +80,7 @@ const ProductsFilter: React.FC<ProductsFilter> = ({
 		}
 
 		router.push(
-			`/products?category=${category}&price=${priceRange.min},${priceRange.max}`
+			`/products?category=${category}&price=${priceRange.min},${priceRange.max}&sort=${currentSort}`
 		)
 	}
 
@@ -137,7 +140,12 @@ const ProductsFilter: React.FC<ProductsFilter> = ({
 																		}}
 																		id={cat.name}
 																	/>
-																	<Label htmlFor={cat.name}>{cat.name}</Label>
+																	<Label htmlFor={cat.name}>
+																		<span className="uppercase">
+																			{cat.name.substring(0, 1)}
+																		</span>
+																		{cat.name.substring(1)}
+																	</Label>
 																</div>
 															</FormControl>
 														</FormItem>

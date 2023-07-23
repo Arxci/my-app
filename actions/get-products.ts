@@ -8,6 +8,7 @@ interface Query {
 	isFeatured?: boolean
 	category?: string
 	price?: string
+	sort?: string
 }
 
 const getProducts = async (query: Query): Promise<Product[]> => {
@@ -17,6 +18,7 @@ const getProducts = async (query: Query): Promise<Product[]> => {
 			isFeatured: query.isFeatured,
 			category: query.category,
 			price: query.price,
+			sort: query.sort,
 		},
 	})
 

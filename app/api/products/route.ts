@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server'
 import { isAdmin } from '@/lib/utils'
 import { connect } from 'http2'
 import { equal } from 'assert'
+import { Prisma } from '@prisma/client'
 
 export const POST = async (req: Request) => {
 	try {
@@ -74,6 +75,12 @@ export const GET = async (req: Request) => {
 		const isFeatured = searchParams.get('isFeatured')
 		const categories = searchParams.get('category')
 		const price = searchParams.get('price')
+		const sort = searchParams.get('sort')
+
+		let formattedSort
+		if (sort === 'asc') formattedSort = Prisma.SortOrder.asc
+		if (!sort || sort === 'desc') formattedSort = Prisma.SortOrder.desc
+
 		const formattedPrice = price !== '' ? price?.split(',') : undefined
 		const formattedCategories =
 			categories !== '' ? categories?.split(',') : undefined
@@ -98,7 +105,7 @@ export const GET = async (req: Request) => {
 				categories: true,
 			},
 			orderBy: {
-				createdAt: 'desc',
+				createdAt: formattedSort,
 			},
 		})
 

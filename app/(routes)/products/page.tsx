@@ -10,13 +10,18 @@ import prismaDB from '@/lib/prisma'
 const ProductsPage = async ({
 	searchParams,
 }: {
-	searchParams: { category: string; price: string }
+	searchParams: { category: string; price: string; sort: string }
 }) => {
-	const { category: categoryFilters, price: currentPrice } = searchParams
+	const {
+		category: categoryFilters,
+		price: currentPrice,
+		sort: currentSort,
+	} = searchParams
 
 	const products = await getProducts({
 		category: categoryFilters,
 		price: currentPrice,
+		sort: currentSort,
 	})
 	const categories = await prismaDB.category.findMany()
 
@@ -37,8 +42,25 @@ const ProductsPage = async ({
 						currentPrice={currentPrice?.split(',').map((price) => {
 							return Number(price)
 						})}
+						currentSort={
+							(!currentSort && currentSort !== 'asc') || 'desc'
+								? 'desc'
+								: currentSort
+						}
 					/>
-					<ProductsSort />
+					<ProductsSort
+						currentFilters={
+							categoryFilters?.length === 0 ? [] : categoryFilters?.split(',')
+						}
+						currentPrice={currentPrice?.split(',').map((price) => {
+							return Number(price)
+						})}
+						currentSort={
+							(!currentSort && currentSort !== 'asc') || 'desc'
+								? 'desc'
+								: currentSort
+						}
+					/>
 				</div>
 				<ProductsShowcase products={products} />
 			</Container>
