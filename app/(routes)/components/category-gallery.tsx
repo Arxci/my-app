@@ -6,25 +6,25 @@ const DUMMY_CARDS = [
 	{
 		id: 0,
 		label: 'Latest in basketball',
-		url: '/',
+		url: '/products?category=basketball',
 		image: '/CategoryGallery01.webp',
 	},
 	{
 		id: 1,
 		label: 'Clothing',
-		url: '/',
+		url: '/products?category=clothing',
 		image: '/CategoryGallery02.webp',
 	},
 	{
 		id: 2,
 		label: 'Soccer Essentials',
-		url: '/',
+		url: '/products?category=soccer',
 		image: '/CategoryGallery03.webp',
 	},
 	{
 		id: 3,
 		label: 'Gear for the Gridiron',
-		url: '/',
+		url: '/products?category=football',
 		image: '/CategoryGallery04.webp',
 	},
 ]
