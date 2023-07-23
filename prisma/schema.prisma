@@ -25,6 +25,7 @@ model Product {
   description     String          @db.Text()
   price           Decimal
   isFeatured      Boolean
+  onSale          Boolean         @default(false)
   images          Image[]      
   categories      Category[]      @relation("ProductToCategory")
   createdAt       DateTime        @default(now())

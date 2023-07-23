@@ -73,11 +73,13 @@ export const GET = async (req: Request) => {
 		const { searchParams } = new URL(req.url)
 		const isFeatured = searchParams.get('isFeatured')
 		const categories = searchParams.get('category')
-		const formattedCategories = categories?.split(',')
+		const formattedCategories =
+			categories !== '' ? categories?.split(',') : undefined
 
 		const products = await prismaDB.product.findMany({
 			where: {
 				isFeatured: isFeatured ? true : undefined,
+
 				categories: {
 					some: {
 						name: {

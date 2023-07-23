@@ -5,14 +5,18 @@ import ProductsSort from './components/ProductsSort'
 import Container from '@/components/ui/container'
 import Heading from '@/components/ui/heading'
 import ProductsShowcase from './components/ProductsShowcase'
+import prismaDB from '@/lib/prisma'
 
 const ProductsPage = async ({
 	searchParams,
 }: {
-	searchParams: { category: string }
+	searchParams: { category: string; price: string }
 }) => {
-	const { category } = searchParams
-	const products = await getProducts({ category })
+	const { category: categoryFilters, price: currentPrice } = searchParams
+
+	const products = await getProducts({ category: categoryFilters })
+	const categories = await prismaDB.category.findMany()
+
 
 	return (
 		<div className="mb-6">
@@ -23,7 +27,13 @@ const ProductsPage = async ({
 					className="my-10 flex flex-col gap-2"
 				/>
 				<div className="flex gap-2 mb-6">
-					<ProductsFilter />
+					<ProductsFilter
+						categories={categories}
+						currentFilters={categoryFilters.length === 0 ? [] : categoryFilters?.split(',')}
+						currentPrice={currentPrice?.split(',').map((price) => {
+							return Number(price)
+						})}
+					/>
 					<ProductsSort />
 				</div>
 				<ProductsShowcase products={products} />
