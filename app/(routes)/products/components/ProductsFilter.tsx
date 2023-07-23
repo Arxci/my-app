@@ -173,6 +173,7 @@ const ProductsFilter: React.FC<ProductsFilter> = ({
 														onValueChange={(value: number[]) => {
 															field.onChange(value)
 														}}
+														id="price"
 													/>
 
 													<div className="flex items-center space-x-4">
@@ -183,6 +184,7 @@ const ProductsFilter: React.FC<ProductsFilter> = ({
 															max={field.value ? field.value[1] : 500}
 															className="h-9"
 															value={field.value ? field.value[0] : 0}
+															id="minPrice"
 															onChange={(e) => {
 																const value = Number(e.target.value)
 																field.onChange([
@@ -199,6 +201,7 @@ const ProductsFilter: React.FC<ProductsFilter> = ({
 															max={500}
 															className="h-9"
 															value={field.value ? field.value[1] : 500}
+															id="maxPrice"
 															onChange={(e) => {
 																const value = Number(e.target.value)
 																field.onChange([

@@ -48,6 +48,7 @@ const UpdateCartItem: React.FC<UpdateCartItemProps> = ({ item }) => {
 				</Button>
 				<Input
 					type="number"
+					id="quantity"
 					min="0"
 					className="h-8 w-14"
 					value={item.quantity}

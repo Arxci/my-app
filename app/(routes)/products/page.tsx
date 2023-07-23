@@ -17,7 +17,6 @@ const ProductsPage = async ({
 	const products = await getProducts({ category: categoryFilters })
 	const categories = await prismaDB.category.findMany()
 
-
 	return (
 		<div className="mb-6">
 			<Container className="px-4 sm:px-8">
@@ -29,7 +28,9 @@ const ProductsPage = async ({
 				<div className="flex gap-2 mb-6">
 					<ProductsFilter
 						categories={categories}
-						currentFilters={categoryFilters.length === 0 ? [] : categoryFilters?.split(',')}
+						currentFilters={
+							categoryFilters?.length === 0 ? [] : categoryFilters?.split(',')
+						}
 						currentPrice={currentPrice?.split(',').map((price) => {
 							return Number(price)
 						})}
