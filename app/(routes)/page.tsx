@@ -49,7 +49,7 @@ const HomePage = async () => {
 						</Link>
 					</div>
 
-					<FavoritesShowcase favorites={featuredProducts} />
+					<FavoritesShowcase favorites={featuredProducts.data} />
 				</div>
 			</Container>
 		</div>

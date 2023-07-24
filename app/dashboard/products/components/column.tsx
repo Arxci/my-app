@@ -46,7 +46,10 @@ export const columns: ColumnDef<ProductsColumn>[] = [
 	},
 	{
 		id: 'actions',
-		header: 'Actions',
-		cell: ({ row }) => <ProductCellAction data={row.original} />,
+		cell: ({ row }) => (
+			<div className="flex justify-end ">
+				<ProductCellAction data={row.original} />
+			</div>
+		),
 	},
 ]

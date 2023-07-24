@@ -2,9 +2,7 @@ import prismaDB from '@/lib/prisma'
 import { auth } from '@clerk/nextjs'
 import { NextResponse } from 'next/server'
 import { isAdmin } from '@/lib/utils'
-import { connect } from 'http2'
-import { equal } from 'assert'
-import { Prisma } from '@prisma/client'
+import { Prisma, Category } from '@prisma/client'
 
 export const POST = async (req: Request) => {
 	try {
@@ -73,17 +71,20 @@ export const GET = async (req: Request) => {
 	try {
 		const { searchParams } = new URL(req.url)
 		const isFeatured = searchParams.get('isFeatured')
-		const categories = searchParams.get('category')
+		const category = searchParams.get('category')
 		const price = searchParams.get('price')
 		const sort = searchParams.get('sort')
+		const skip = searchParams.get('skip')
+		const take = searchParams.get('take')
 
 		let formattedSort
 		if (sort === 'asc') formattedSort = Prisma.SortOrder.asc
 		if (!sort || sort === 'desc') formattedSort = Prisma.SortOrder.desc
-
 		const formattedPrice = price !== '' ? price?.split(',') : undefined
 		const formattedCategories =
-			categories !== '' ? categories?.split(',') : undefined
+			category !== '' ? category?.split(',') : undefined
+		const formattedSkip = skip ? skip : 0
+		const formattedTake = take ? take : 16
 
 		const products = await prismaDB.product.findMany({
 			where: {
@@ -100,12 +101,34 @@ export const GET = async (req: Request) => {
 					},
 				},
 			},
+			skip: Number(formattedSkip),
+			take: Number(formattedTake),
 			include: {
 				images: true,
 				categories: true,
 			},
 			orderBy: {
 				createdAt: formattedSort,
+			},
+		})
+
+		const fullList = await prismaDB.product.findMany({
+			where: {
+				isFeatured: isFeatured ? true : undefined,
+				price: {
+					gt: Number(formattedPrice ? formattedPrice[0] : 0),
+					lt: Number(formattedPrice ? formattedPrice[1] : 500),
+				},
+				categories: {
+					every: {
+						name: {
+							in: formattedCategories,
+						},
+					},
+				},
+			},
+			include: {
+				categories: true,
 			},
 		})
 
@@ -120,7 +143,25 @@ export const GET = async (req: Request) => {
 			return checker(names, formattedCategories)
 		})
 
-		return NextResponse.json(filteredProducts)
+		const filteredCount = fullList.filter((product) => {
+			if (!formattedCategories) {
+				return true
+			}
+			const names = product.categories.map((cat) => cat.name)
+			let checker = (arr: string[], target: string[]) =>
+				target.every((v) => arr.includes(v))
+
+			return checker(names, formattedCategories)
+		})
+
+		const data = {
+			pagination: {
+				total: filteredCount.length,
+			},
+			data: filteredProducts,
+		}
+
+		return NextResponse.json(data)
 	} catch (error) {
 		console.log('[PRODUCTS_GET]', error)
 		return new NextResponse('internal error', { status: 500 })

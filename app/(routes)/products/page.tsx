@@ -1,28 +1,46 @@
 import getProducts from '@/actions/get-products'
 import ProductsFilter from './components/ProductsFilter'
 import ProductsSort from './components/ProductsSort'
+import { type Metadata } from 'next'
 
 import Container from '@/components/ui/container'
 import Heading from '@/components/ui/heading'
 import ProductsShowcase from './components/ProductsShowcase'
 import prismaDB from '@/lib/prisma'
+import ProductPagination from './components/ProductPagination'
+
+export const metadata: Metadata = {
+	title: 'Products',
+	description: 'Buy products from our stores',
+}
 
 const ProductsPage = async ({
 	searchParams,
 }: {
-	searchParams: { category: string; price: string; sort: string }
+	searchParams: {
+		category: string
+		price: string
+		sort: string
+		skip: string
+		take: string
+	}
 }) => {
 	const {
 		category: categoryFilters,
 		price: currentPrice,
 		sort: currentSort,
+		skip,
+		take,
 	} = searchParams
 
 	const products = await getProducts({
 		category: categoryFilters,
 		price: currentPrice,
 		sort: currentSort,
+		skip: skip,
+		take: take,
 	})
+
 	const categories = await prismaDB.category.findMany()
 
 	return (
@@ -56,13 +74,30 @@ const ProductsPage = async ({
 							return Number(price)
 						})}
 						currentSort={
-							(!currentSort && currentSort !== 'asc') || 'desc'
+							//prettier-ignore
+							!currentSort && (currentSort !== 'asc' || 'desc')
 								? 'desc'
 								: currentSort
 						}
 					/>
 				</div>
-				<ProductsShowcase products={products} />
+				<ProductsShowcase products={products.data} />
+				<ProductPagination
+					skip={skip ? Number(skip) : 0}
+					take={take ? Number(take) : 16}
+					maxCount={products.pagination.total}
+					currentFilters={
+						categoryFilters?.length === 0 ? [] : categoryFilters?.split(',')
+					}
+					currentPrice={currentPrice?.split(',').map((price) => {
+						return Number(price)
+					})}
+					currentSort={
+						(!currentSort && currentSort !== 'asc') || 'desc'
+							? 'desc'
+							: currentSort
+					}
+				/>
 			</Container>
 		</div>
 	)

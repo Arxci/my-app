@@ -29,7 +29,7 @@ const CategoriesPage = async () => {
 				<div className="flex-1">
 					<div className="flex flex-col gap-2 sm:items-center sm:flex-row py-6 justify-between">
 						<Heading
-							title={`Categories`}
+							title={`Categories - ${formattedCategories.length}`}
 							description="Manage categories for your store"
 						/>
 						<CategoriesActions />

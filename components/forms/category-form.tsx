@@ -75,7 +75,7 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ initialData }) => {
 
 	const cancelEditHandler = () => {
 		router.push(`/dashboard/categories`)
-		toast('Cancelled')
+		toast('Edit cancelled')
 	}
 
 	const deleteProductHandler = async () => {

@@ -55,7 +55,7 @@ export const ProductCellAction: React.FC<ProductCellActionProps> = ({
 				<Button
 					onClick={updateHandler}
 					className="flex gap-2 items-center"
-					variant="secondary"
+					variant="outline"
 				>
 					<Icons.edit className="h-4 w-4" />
 					Update

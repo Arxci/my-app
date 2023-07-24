@@ -104,7 +104,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
 
 	const cancelEditHandler = () => {
 		router.push(`/dashboard/products`)
-		toast('Cancelled')
+		toast('Edit cancelled')
 	}
 
 	const deleteProductHandler = async () => {

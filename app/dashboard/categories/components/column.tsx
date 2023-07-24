@@ -24,7 +24,10 @@ export const columns: ColumnDef<CategoryColumn>[] = [
 	},
 	{
 		id: 'actions',
-		header: 'Actions',
-		cell: ({ row }) => <CategoryCellAction data={row.original} />,
+		cell: ({ row }) => (
+			<div className="flex justify-end ">
+				<CategoryCellAction data={row.original} />
+			</div>
+		),
 	},
 ]

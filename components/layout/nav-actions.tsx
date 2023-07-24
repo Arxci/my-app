@@ -31,7 +31,7 @@ const NavActions = async () => {
 							buttonVariants({
 								variant: 'default',
 							}),
-							'hidden lg:block'
+							'hidden lg:flex items-center'
 						)}
 					>
 						Sign In
@@ -46,7 +46,7 @@ const NavActions = async () => {
 							buttonVariants({
 								variant: 'outline',
 							}),
-							'hidden lg:block'
+							'hidden lg:flex items-center'
 						)}
 					>
 						Dashboard

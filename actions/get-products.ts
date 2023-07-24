@@ -9,9 +9,13 @@ interface Query {
 	category?: string
 	price?: string
 	sort?: string
+	skip?: string
+	take?: string
 }
 
-const getProducts = async (query: Query): Promise<Product[]> => {
+const getProducts = async (
+	query: Query
+): Promise<{ pagination: { total: number }; data: Product[] }> => {
 	const url = queryString.stringifyUrl({
 		url: URL,
 		query: {
@@ -19,6 +23,8 @@ const getProducts = async (query: Query): Promise<Product[]> => {
 			category: query.category,
 			price: query.price,
 			sort: query.sort,
+			skip: query.skip,
+			take: query.take,
 		},
 	})
 

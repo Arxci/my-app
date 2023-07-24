@@ -43,7 +43,7 @@ const ProductsPage = async () => {
 				<div className="flex-1">
 					<div className="flex flex-col gap-2 sm:items-center sm:flex-row py-6 justify-between">
 						<Heading
-							title={`Products`}
+							title={`Products - ${formattedProducts.length}`}
 							description="Manage products for your store"
 						/>
 						<ProductsActions />

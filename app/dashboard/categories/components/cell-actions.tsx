@@ -40,6 +40,10 @@ export const CategoryCellAction: React.FC<CategoryCellActionProps> = ({
 		}
 	}
 
+	const updateHandler = () => {
+		router.push(`/dashboard/categories/${id}`)
+	}
+
 	return (
 		<>
 			<AlertModal
@@ -48,14 +52,15 @@ export const CategoryCellAction: React.FC<CategoryCellActionProps> = ({
 				onConfirm={deleteHandler}
 				onClose={() => setOpen(false)}
 			/>
-			<div className="flex gap-2  items-center ">
-				<Link
-					href={`/dashboard/categories/${id}`}
-					className={buttonVariants({ variant: 'outline' })}
+			<div className="flex gap-2 items-center">
+				<Button
+					onClick={updateHandler}
+					className="flex gap-2 items-center"
+					variant="outline"
 				>
 					<Icons.edit className="h-4 w-4" />
 					Update
-				</Link>
+				</Button>
 				<Button
 					onClick={() => setOpen(true)}
 					className="flex gap-2 items-center"
