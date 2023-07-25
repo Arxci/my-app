@@ -6,8 +6,8 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 const ProjectsLoading = () => {
 	return (
-		<div className="mb-6 pt-6">
-			<Container className="px-4 sm:px-8">
+		<div className="mb-6 pt-6 px-4 sm:px-8">
+			<Container className="">
 				<div className="space-y-2 pb-6">
 					<Skeleton className="h-10 w-28" />
 					<Skeleton className="h-4 w-48" />

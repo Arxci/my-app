@@ -1,13 +1,13 @@
 import getProducts from '@/actions/get-products'
-import ProductsFilter from './components/ProductsFilter'
-import ProductsSort from './components/ProductsSort'
+import ProductsFilter from './components/products-filter'
+import ProductsSort from './components/products-sort'
 import { type Metadata } from 'next'
 
 import Container from '@/components/ui/container'
 import Heading from '@/components/ui/heading'
-import ProductsShowcase from './components/ProductsShowcase'
+import ProductsShowcase from './components/products-showcase'
 import prismaDB from '@/lib/prisma'
-import ProductPagination from './components/ProductPagination'
+import ProductPagination from './components/product-pagination'
 
 export const metadata: Metadata = {
 	title: 'Products',
@@ -44,8 +44,8 @@ const ProductsPage = async ({
 	const categories = await prismaDB.category.findMany()
 
 	return (
-		<div className="mb-6">
-			<Container className="px-4 sm:px-8">
+		<div className="mb-6 px-4 sm:px-8">
+			<Container className="">
 				<Heading
 					title="Products"
 					description="Buy products from our store"
