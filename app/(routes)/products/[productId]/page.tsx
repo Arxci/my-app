@@ -13,6 +13,9 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from '@/components/ui/accordion'
+import ProductCard from '@/components/product-card'
+import getSimilarProducts from '@/actions/get-similar-products'
+import Heading from '@/components/ui/heading'
 
 const ProductPage = async ({ params }: { params: { productId: string } }) => {
 	const { productId } = params
@@ -25,6 +28,34 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
 			categories: true,
 		},
 	})
+
+	const categories = product?.categories.map((cat, index) => {
+		return cat.name
+	})
+
+	let similarProducts
+	if (categories) {
+		similarProducts = await getSimilarProducts({
+			category: categories[0] || '',
+		})
+	}
+
+	let filteredProducts = null
+	if (similarProducts) {
+		filteredProducts = similarProducts?.data.filter((item, index) => {
+			if (product?.id === item.id) {
+				return false
+			}
+
+			if (index > 4) {
+				return false
+			}
+
+			return true
+		})
+	}
+
+	console.log(filteredProducts)
 
 	return (
 		<div className="px-4 sm:px-8 mb-6">
@@ -94,6 +125,20 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
 						</Accordion>
 					</div>
 				</div>
+				{filteredProducts && filteredProducts?.length > 0 && (
+					<div className="pt-10">
+						<Heading
+							title="Similar Products"
+							description="Check out some similar products"
+							className="my-10 flex flex-col gap-2"
+						/>
+						<div className="w-full grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+							{filteredProducts?.map((simProduct) => (
+								<ProductCard product={simProduct} />
+							))}
+						</div>
+					</div>
+				)}
 			</Container>
 		</div>
 	)
