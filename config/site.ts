@@ -49,4 +49,48 @@ export const siteConfig = {
 			],
 		})),
 	],
+	footerNav: [
+		...productCategories.map((category) => ({
+			title: category.title,
+			items: [
+				{
+					title: 'All',
+					href: `/products/?category=${slugify(category.title)}`,
+					external: false,
+				},
+				...category.subcategories.map((subcategory) => ({
+					title: subcategory.title,
+					href: `/products/?category=${slugify(category.title)},${
+						subcategory.slug
+					}`,
+					external: false,
+				})),
+			],
+		})),
+		{
+			title: 'Help',
+			items: [
+				{
+					title: 'About',
+					href: '/about',
+					external: false,
+				},
+				{
+					title: 'Contact',
+					href: '/contact',
+					external: false,
+				},
+				{
+					title: 'Terms',
+					href: '/terms',
+					external: false,
+				},
+				{
+					title: 'Privacy',
+					href: '/privacy',
+					external: false,
+				},
+			],
+		},
+	],
 }

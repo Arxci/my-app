@@ -18,11 +18,8 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ product }) => {
 			target.every((v) => arr.includes(v))
 		const names = product?.categories?.map((cat) => cat.name)
 
-		console.log([category.title.toLowerCase()])
 		return checker(names, [category.title.toLowerCase()])
 	})
-
-	console.log(category)
 
 	return (
 		<nav
@@ -77,7 +74,7 @@ const BreadcrumbItem: React.FC<BreadcrumbItemProps> = ({
 	return (
 		<div key={id}>
 			<Link
-				href={`/products?category=${name}`}
+				href={`/products?category=${name.toLowerCase()}`}
 				className={cn(
 					'text-sm hover:text-muted-foreground transition-colors',
 					className

@@ -81,23 +81,32 @@ const ProductsPage = async ({
 						}
 					/>
 				</div>
-				<ProductsShowcase products={products.data} />
-				<ProductPagination
-					skip={skip ? Number(skip) : 0}
-					take={take ? Number(take) : 16}
-					maxCount={products.pagination.total}
-					currentFilters={
-						categoryFilters?.length === 0 ? [] : categoryFilters?.split(',')
-					}
-					currentPrice={currentPrice?.split(',').map((price) => {
-						return Number(price)
-					})}
-					currentSort={
-						(!currentSort && currentSort !== 'asc') || 'desc'
-							? 'desc'
-							: currentSort
-					}
-				/>
+
+				{products.data && products.data.length > 0 && (
+					<ProductsShowcase products={products.data} />
+				)}
+				{products.data && products.data.length <= 0 && (
+					<div>No products found...</div>
+				)}
+
+				{products.pagination && products.pagination.total > 15 && (
+					<ProductPagination
+						skip={skip ? Number(skip) : 0}
+						take={take ? Number(take) : 16}
+						maxCount={products.pagination.total}
+						currentFilters={
+							categoryFilters?.length === 0 ? [] : categoryFilters?.split(',')
+						}
+						currentPrice={currentPrice?.split(',').map((price) => {
+							return Number(price)
+						})}
+						currentSort={
+							(!currentSort && currentSort !== 'asc') || 'desc'
+								? 'desc'
+								: currentSort
+						}
+					/>
+				)}
 			</Container>
 		</div>
 	)

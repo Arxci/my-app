@@ -27,7 +27,19 @@ const CartButton = () => {
 	}, [])
 
 	if (!mounted) {
-		return null
+		return (
+			<Button
+				aria-label="Cart"
+				className="relative"
+				variant="outline"
+				size="icon"
+			>
+				<Icons.cart
+					className="h-4 w-4"
+					aria-hidden="true"
+				/>
+			</Button>
+		)
 	}
 
 	const itemCount = cart.items.reduce(

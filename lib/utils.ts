@@ -32,7 +32,7 @@ export const isAdmin = async () => {
 		return null
 	}
 
-	return user.publicMetadata.userType === 'admin'
+	return user.privateMetadata.userType === 'admin'
 }
 
 export const formatter = new Intl.NumberFormat('en-US', {

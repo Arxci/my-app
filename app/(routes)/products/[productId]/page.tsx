@@ -29,7 +29,7 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
 		},
 	})
 
-	const categories = product?.categories.map((cat, index) => {
+	const categories = product?.categories.map((cat) => {
 		return cat.name
 	})
 
@@ -56,7 +56,7 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
 	}
 
 	return (
-		<div className="px-4 sm:px-8 mb-6">
+		<div className="px-4 sm:px-8 mb-6 ">
 			<Container className=" ">
 				<Breadcrumbs product={product} />
 				<div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-20 ">
@@ -67,7 +67,7 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
 								alt={product.images[0]?.url ?? product.name}
 								sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 								fill
-								className="object-cover"
+								className="object-cover object-center"
 								loading="lazy"
 							/>
 						) : (

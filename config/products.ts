@@ -58,7 +58,7 @@ export const productCategories = [
 		],
 	},
 	{
-		title: 'accessories',
+		title: 'Accessories',
 		subcategories: [
 			{
 				title: 'Socks',
