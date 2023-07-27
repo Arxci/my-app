@@ -28,6 +28,7 @@ export interface Product {
 	description: string
 	isFeatured: boolean
 	images: Image[]
+	onSale: boolean
 }
 
 export interface CartItem {

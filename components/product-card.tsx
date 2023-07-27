@@ -17,6 +17,7 @@ import { formatter } from '@/lib/utils'
 import { Button, buttonVariants } from './ui/button'
 import { MouseEventHandler } from 'react'
 import useCart from '@/hooks/use-cart'
+import { Badge } from './ui/badge'
 
 interface ProductCardProps {
 	product: Product
@@ -76,8 +77,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 			>
 				<CardContent className="grid gap-2.5 p-4">
 					<CardTitle className="line-clamp-1">{product.name}</CardTitle>
-					<CardDescription className="line-clamp-2">
+					<CardDescription className="line-clamp-2 flex gap-2 items-center">
 						{formatter.format(Number(product.price))}
+						{product.onSale && <Badge variant="secondary">On Sale</Badge>}
 					</CardDescription>
 				</CardContent>
 			</Link>

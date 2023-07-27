@@ -37,6 +37,7 @@ const formSchema = z.object({
 	images: z.object({ url: z.string() }).array(),
 	isFeatured: z.boolean().default(false).optional(),
 	categoryIds: z.object({ id: z.string() }).array(),
+	onSale: z.boolean().default(false).optional(),
 })
 
 type ProductFormValues = z.infer<typeof formSchema>
@@ -76,6 +77,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
 				images: [],
 				isFeatured: false,
 				categoryIds: [],
+				onSale: false,
 		  }
 
 	const form = useForm<ProductFormValues>({
@@ -180,7 +182,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
 						)}
 					/>
 
-					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 items-end">
+					<div className="grid grid-cols-1 sm:grid-cols-2  gap-8 items-end">
 						<FormField
 							control={form.control}
 							name="name"
@@ -213,6 +215,30 @@ const ProductForm: React.FC<ProductFormProps> = ({
 										/>
 									</FormControl>
 									<FormMessage />
+								</FormItem>
+							)}
+						/>
+					</div>
+					<div className="grid grid-cols-1 sm:grid-cols-2  gap-8 items-end">
+						<FormField
+							control={form.control}
+							name="onSale"
+							render={({ field }) => (
+								<FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+									<div className="space-y-0.5">
+										<FormLabel className="text-base">On Sale</FormLabel>
+										<FormDescription>
+											Should this product be on sale?
+										</FormDescription>
+									</div>
+									<FormControl>
+										<Switch
+											checked={field.value}
+											onCheckedChange={field.onChange}
+											disabled={loading}
+											aria-readonly
+										/>
+									</FormControl>
 								</FormItem>
 							)}
 						/>

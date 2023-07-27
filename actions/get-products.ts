@@ -5,12 +5,13 @@ import { Product } from '@/types'
 const URL = `${process.env.NEXT_PUBLIC_API_URL}products`
 
 interface Query {
-	isFeatured?: boolean
+	isFeatured?: string
 	category?: string
 	price?: string
 	sort?: string
 	skip?: string
 	take?: string
+	onSale?: string
 }
 
 const getProducts = async (
@@ -25,6 +26,7 @@ const getProducts = async (
 			sort: query.sort,
 			skip: query.skip,
 			take: query.take,
+			onSale: query.onSale,
 		},
 	})
 

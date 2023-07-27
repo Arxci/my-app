@@ -9,7 +9,7 @@ import { buttonVariants } from '@/components/ui/button'
 import Link from 'next/link'
 
 const HomePage = async () => {
-	const featuredProducts = await getProducts({ isFeatured: true })
+	const featuredProducts = await getProducts({ isFeatured: 'true' })
 
 	return (
 		<div>
@@ -39,7 +39,7 @@ const HomePage = async () => {
 							</p>
 						</div>
 						<Link
-							href={'/products'}
+							href={'/products?isFeatured=true'}
 							className={buttonVariants({
 								variant: 'default',
 								size: 'lg',

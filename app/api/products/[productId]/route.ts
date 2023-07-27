@@ -14,7 +14,15 @@ export const PATCH = async (
 		const admin = await isAdmin()
 		const { productId } = params
 
-		const { name, price, description, images, isFeatured, categoryIds } = body
+		const {
+			name,
+			price,
+			description,
+			images,
+			isFeatured,
+			categoryIds,
+			onSale,
+		} = body
 
 		if (!admin) {
 			return new NextResponse('Unauthorized', { status: 401 })
@@ -56,6 +64,7 @@ export const PATCH = async (
 				name,
 				price,
 				description,
+				onSale,
 				images: {
 					deleteMany: {},
 				},

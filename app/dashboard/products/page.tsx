@@ -23,6 +23,9 @@ const ProductsPage = async () => {
 		const formattedIsFeatured =
 			item.isFeatured.toString().substring(0, 1).toUpperCase() +
 			item.isFeatured.toString().substring(1)
+		const formattedOnSale =
+			item.onSale.toString().substring(0, 1).toUpperCase() +
+			item.onSale.toString().substring(1)
 		const formattedDescription = item.description.substring(0, 100) + '...'
 		const formattedPrice = formatter.format(item.price.toNumber())
 
@@ -33,6 +36,7 @@ const ProductsPage = async () => {
 			price: formattedPrice,
 			isFeatured: formattedIsFeatured,
 			categories: item.categories,
+			onSale: formattedOnSale,
 			createdAt: format(item.createdAt, 'MMMM do, yyyy'),
 		}
 	})

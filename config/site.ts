@@ -17,13 +17,13 @@ export const siteConfig = {
 				},
 				{
 					title: 'On Sale',
-					href: '/',
+					href: '/products?onSale=true',
 					description: 'View all of our on sale products.',
 					items: [],
 				},
 				{
-					title: 'Features',
-					href: '/',
+					title: 'Featured',
+					href: '/products?isFeatured=true',
 					description: 'Check out some of our favorites!',
 					items: [],
 				},

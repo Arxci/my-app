@@ -2,14 +2,22 @@ import prismaDB from '@/lib/prisma'
 import { auth } from '@clerk/nextjs'
 import { NextResponse } from 'next/server'
 import { isAdmin } from '@/lib/utils'
-import { Prisma, Category } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 
 export const POST = async (req: Request) => {
 	try {
 		const { userId } = auth()
 		const body = await req.json()
 
-		const { name, description, price, images, isFeatured, categoryIds } = body
+		const {
+			name,
+			description,
+			price,
+			images,
+			isFeatured,
+			categoryIds,
+			onSale,
+		} = body
 
 		const admin = await isAdmin()
 
@@ -23,6 +31,10 @@ export const POST = async (req: Request) => {
 
 		if (!name) {
 			return new NextResponse('Name is required', { status: 400 })
+		}
+
+		if (!onSale) {
+			return new NextResponse('On Sale is required', { status: 400 })
 		}
 
 		if (!categoryIds || !categoryIds.length) {
@@ -49,6 +61,7 @@ export const POST = async (req: Request) => {
 				price,
 				description,
 				isFeatured,
+				onSale,
 				categories: {
 					connect: [...categoryIds],
 				},
@@ -76,6 +89,7 @@ export const GET = async (req: Request) => {
 		const sort = searchParams.get('sort')
 		const skip = searchParams.get('skip')
 		const take = searchParams.get('take')
+		const onSale = searchParams.get('onSale')
 
 		let formattedSort
 		if (sort === 'asc') formattedSort = Prisma.SortOrder.asc
@@ -89,6 +103,7 @@ export const GET = async (req: Request) => {
 		const products = await prismaDB.product.findMany({
 			where: {
 				isFeatured: isFeatured ? true : undefined,
+				onSale: onSale ? true : undefined,
 				price: {
 					gt: Number(formattedPrice ? formattedPrice[0] : 0),
 					lt: Number(formattedPrice ? formattedPrice[1] : 500),
@@ -115,6 +130,7 @@ export const GET = async (req: Request) => {
 		const fullList = await prismaDB.product.findMany({
 			where: {
 				isFeatured: isFeatured ? true : undefined,
+				onSale: onSale ? true : undefined,
 				price: {
 					gt: Number(formattedPrice ? formattedPrice[0] : 0),
 					lt: Number(formattedPrice ? formattedPrice[1] : 500),

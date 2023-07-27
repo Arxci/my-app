@@ -23,6 +23,8 @@ const ProductsPage = async ({
 		sort: string
 		skip: string
 		take: string
+		isFeatured: string
+		onSale: string
 	}
 }) => {
 	const {
@@ -31,6 +33,8 @@ const ProductsPage = async ({
 		sort: currentSort,
 		skip,
 		take,
+		isFeatured,
+		onSale,
 	} = searchParams
 
 	const products = await getProducts({
@@ -39,7 +43,11 @@ const ProductsPage = async ({
 		sort: currentSort,
 		skip: skip,
 		take: take,
+		isFeatured: isFeatured,
+		onSale: onSale,
 	})
+
+	console.log(onSale)
 
 	const categories = await prismaDB.category.findMany()
 
