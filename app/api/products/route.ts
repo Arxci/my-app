@@ -132,7 +132,7 @@ export const GET = async (req: Request) => {
 					lt: Number(formattedPrice ? formattedPrice[1] : 500),
 				},
 				categories: {
-					every: {
+					some: {
 						name: {
 							in: formattedCategories,
 						},

@@ -47,8 +47,6 @@ const ProductsPage = async ({
 		onSale: onSale,
 	})
 
-	console.log(onSale)
-
 	const categories = await prismaDB.category.findMany()
 
 	return (
