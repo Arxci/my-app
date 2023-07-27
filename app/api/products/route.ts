@@ -33,10 +33,6 @@ export const POST = async (req: Request) => {
 			return new NextResponse('Name is required', { status: 400 })
 		}
 
-		if (!onSale) {
-			return new NextResponse('On Sale is required', { status: 400 })
-		}
-
 		if (!categoryIds || !categoryIds.length) {
 			return new NextResponse('Please assign a category is required', {
 				status: 400,

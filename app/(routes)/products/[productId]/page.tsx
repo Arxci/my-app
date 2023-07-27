@@ -55,6 +55,8 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
 		})
 	}
 
+	console.log(similarProducts)
+
 	return (
 		<div className="px-4 sm:px-8 mb-6 ">
 			<Container className=" ">
