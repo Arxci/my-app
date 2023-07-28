@@ -1,5 +1,5 @@
 const DashboardPage = () => {
-	return <div>page</div>
+	return <div className="flex-col">page</div>
 }
 
 export default DashboardPage

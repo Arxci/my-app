@@ -32,10 +32,7 @@ const CartButton = () => {
 
 	useEffect(() => {
 		if (searchParams.get('success')) {
-			toast.success('Payment completed')
-		}
-		if (searchParams.get('cancelled')) {
-			toast.error('something went wrong')
+			cart.removeAll()
 		}
 	}, [searchParams])
 
