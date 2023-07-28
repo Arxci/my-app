@@ -5,10 +5,14 @@ import { stripe } from '@/lib/stripe'
 import prismaDB from '@/lib/prisma'
 
 export const POST = async (req: Request) => {
-	const { productIds } = await req.json()
+	const { productIds, quantity } = await req.json()
 
 	if (!productIds || productIds.length === 0) {
 		return new NextResponse('Products are required', { status: 400 })
+	}
+
+	if (!quantity || quantity.length === 0) {
+		return new NextResponse('quantity is required', { status: 400 })
 	}
 
 	const products = await prismaDB.product.findMany({
@@ -21,9 +25,18 @@ export const POST = async (req: Request) => {
 
 	const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = []
 
+	interface ProductQuantityInterface {
+		quantity: string
+		id: string
+	}
+
+	let index = 0
 	products.forEach((product) => {
+		const productQuantity = quantity.find(
+			(obj: ProductQuantityInterface) => obj.id === product.id
+		).quantity
 		line_items.push({
-			quantity: 1,
+			quantity: productQuantity,
 			price_data: {
 				currency: 'USD',
 				product_data: {
@@ -32,6 +45,7 @@ export const POST = async (req: Request) => {
 				unit_amount: product.price.toNumber() * 100,
 			},
 		})
+		index += 1
 	})
 
 	const order = await prismaDB.order.create({
@@ -57,7 +71,7 @@ export const POST = async (req: Request) => {
 			enabled: true,
 		},
 		success_url: `${process.env.FRONTEND_STORE_URL}/cart?success=1`,
-		cancel_url: `${process.env.FRONTEND_STORE_URL}/cart?canceled=1`,
+		cancel_url: `${process.env.FRONTEND_STORE_URL}/cart?cancelled=1`,
 		metadata: {
 			orderId: order.id,
 		},

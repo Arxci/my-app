@@ -17,14 +17,41 @@ import { ScrollArea } from '../ui/scroll-area'
 import Image from 'next/image'
 import { formatter } from '@/lib/utils'
 import UpdateCartItem from './update-cart-item'
+import { useSearchParams } from 'next/navigation'
+import { toast } from 'sonner'
+import axios from 'axios'
 
 const CartButton = () => {
 	const [mounted, setMounted] = useState(false)
+	const searchParams = useSearchParams()
 	const cart = useCart()
 
 	useEffect(() => {
 		setMounted(true)
 	}, [])
+
+	useEffect(() => {
+		if (searchParams.get('success')) {
+			toast.success('Payment completed')
+		}
+		if (searchParams.get('cancelled')) {
+			toast.error('something went wrong')
+		}
+	}, [searchParams])
+
+	const checkoutHandler = async () => {
+		const response = await axios.post(
+			`${process.env.NEXT_PUBLIC_API_URL}/checkout`,
+			{
+				productIds: cart.items.map((item) => item.id),
+				quantity: cart.items.map((item) => {
+					return { quantity: item.quantity, id: item.id }
+				}),
+			}
+		)
+
+		window.location = response.data.url
+	}
 
 	if (!mounted) {
 		return (
@@ -148,6 +175,7 @@ const CartButton = () => {
 									aria-label="Proceed to checkout"
 									size="sm"
 									className="w-full"
+									onClick={checkoutHandler}
 								>
 									Proceed to Checkout
 								</Button>
