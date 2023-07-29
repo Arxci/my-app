@@ -38,7 +38,7 @@ const DashboardNavDesktop = () => {
 	]
 
 	return (
-		<ul className="flex items-center gap-6 w-full">
+		<ul className=" items-center gap-6 w-full hidden lg:flex ">
 			{NAV_LINKS.map((link) => (
 				<NavLink
 					key={link.id}

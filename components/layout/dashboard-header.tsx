@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Container from '../ui/container'
 import DashboardNavDesktop from './dashboard-nav-desktop'
 import { siteConfig } from '@/config/site'
+import DashboardHamburgerButton from '../dashboard-hamburger-button'
 
 const DashboardHeader = () => {
 	return (
@@ -12,11 +13,12 @@ const DashboardHeader = () => {
 					<Link
 						aria-label="Home"
 						href="/"
-						className="hidden font-bold lg:inline-block space-x-2"
+						className="font-bold inline-block space-x-2"
 					>
 						{siteConfig.name}
 					</Link>
 					<DashboardNavDesktop />
+					<DashboardHamburgerButton />
 				</nav>
 			</Container>
 		</header>
