@@ -134,7 +134,10 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
 						/>
 						<div className="w-full grid md:grid-cols-2 lg:grid-cols-4 gap-4">
 							{filteredProducts?.map((simProduct) => (
-								<ProductCard product={simProduct} />
+								<ProductCard
+									key={simProduct.id}
+									product={simProduct}
+								/>
 							))}
 						</div>
 					</div>
