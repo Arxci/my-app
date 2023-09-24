@@ -1,14 +1,18 @@
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
+import Link from 'next/link'
 
 const BannerActions = () => {
 	return (
 		<div className="flex items-center gap-4">
-			<Button
-				size="lg"
-				variant="default"
+			<Link
+				href={'/products'}
+				className={buttonVariants({
+					variant: 'default',
+					size: 'lg',
+				})}
 			>
 				Shop Now
-			</Button>
+			</Link>
 		</div>
 	)
 }
